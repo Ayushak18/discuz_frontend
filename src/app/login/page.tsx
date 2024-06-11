@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,7 +45,7 @@ const Login = () => {
     useMutation({
       mutationFn: (user) => {
         return axios
-          .post("http://3.6.132.27/api/user/login", user)
+          .post("http://localhost:3000/user/login", user)
           .then((res) => res.data);
       },
     });
@@ -73,10 +72,10 @@ const Login = () => {
           <div className="w-[50%] m-auto">
             <div className="text-center my-[2rem]">
               <h2 className="text-[#D9D9D9] text-[50px] font-bold">
-                Welcome Back!
+                Welcome <span className="text-blue-500 font-bold">Back!</span>
               </h2>
               <p className="text-[#D9D9D9]">
-                Login to elevate your B2B connections
+              <span className="text-blue-500 text-[16px]">Login to elevate</span> &nbsp; your B2B connections
               </p>
             </div>
 
@@ -117,15 +116,15 @@ const Login = () => {
                 </div>
                 <Button
                   type="submit"
-                  className="py-[1.5rem] hover:bg-blue-600 font-bold text-[#ffffff] bg-[#1A88E1] w-full my-[6%] rounded"
+                  className="py-[1.5rem] hover:bg-blue-600 font-medium text-[#ffffff] text-[12px] bg-[#1A88E1] w-full my-[6%] rounded"
                 >
-                  LOGIN IN
+                  LOGIN
                 </Button>
               </form>
-              <p className="text-[#D9D9D9] text-center my-[0.5rem]">
+              <p className="text-[#D9D9D9] text-[12px] text-center my-[0.5rem]">
                 Forgot Password?
               </p>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center text-[12px] justify-center">
                 <p className="text-[#D9D9D9]">
                   Don't have an account?{" "}
                   <Link href={"/signup"}>
@@ -142,14 +141,16 @@ const Login = () => {
 
         {/* Image Section */}
         <div className="py-[100px] w-[30%] mx-auto">
-          <Image
-            src={"/Login_filler.svg"}
-            width={600}
-            height={200}
+          <img
+            src={"/login.svg"}
+            style={{borderRadius:'50%', width:'400px', height:'400px'}}
+            className="rounded-full object-contain mx-auto"
+            // width={400}
+            // height={400}
             alt="Project Logo"
-          ></Image>
-          <p className="my-[2rem] text-[24px] text-[#D9D9D9]">
-            "Thrive virtually with our B2B Video Call and Messaging App.
+          ></img>
+          <p className="my-[2rem] text-[12px] text-center text-[#D9D9D9]">
+            "Thrive virtually with our <b>B2B Video Call and Messaging App.</b>
             Showcase, engage, and close deals from anywhere. Empower your
             business growth without in-person meetings."
           </p>

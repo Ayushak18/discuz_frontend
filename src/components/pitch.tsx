@@ -7,16 +7,18 @@ const Pitch: React.FC = () => {
   return (
     <div className="w-[80%] m-auto flex flex-col h-full items-center">
       <div className="text-center">
-        <h2 className="text-[#D9D9D9] my-[14%] text-[28px] font-medium">
-          VIRTUAL PITCH
-        </h2>
+      <h2 className="text-[#D9D9D9] my-[14%] text-[20px] font-medium">
+     <span className="text-[16px]">Create Your {' '}</span>
+      <span className="text-blue-500 font-bold text-[22px]">Vi</span>rtual{' '}
+      <span className="text-blue-500 font-bold text-[22px]">Pi</span>tch
+    </h2>
       </div>
 
       {/* Form Section */}
       <div className="w-[65%] mx-auto my-[5%]">
         <div className="flex flex-row mt-[4%]">
           <div className="mr-auto w-[45%]">
-            <Label className="text-[#D9D9D9]" htmlFor="company">
+            <Label className="text-[#D9D9D9] text-[12px]" htmlFor="company">
               Company
             </Label>
             <Input
@@ -26,7 +28,7 @@ const Pitch: React.FC = () => {
             />
           </div>
           <div className="w-[45%]">
-            <Label className="text-[#D9D9D9]" htmlFor="title">
+            <Label className="text-[#D9D9D9] text-[12px]" htmlFor="title">
               Product Title
             </Label>
             <Input
@@ -38,7 +40,7 @@ const Pitch: React.FC = () => {
         </div>
         <div className="flex flex-row mt-[4%]">
           <div className="mr-auto  w-[45%]">
-            <Label className="text-[#D9D9D9]" htmlFor="price">
+            <Label className="text-[#D9D9D9] text-[12px]" htmlFor="price">
               Price
             </Label>
             <Input
@@ -48,7 +50,7 @@ const Pitch: React.FC = () => {
             />
           </div>
           <div className="w-[45%]">
-            <Label className="text-[#D9D9D9]" htmlFor="location">
+            <Label className="text-[#D9D9D9] text-[12px]" htmlFor="location">
               Location
             </Label>
             <Input
@@ -59,7 +61,7 @@ const Pitch: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col mx-auto mt-[6%]">
-          <Label className="text-[#D9D9D9]" htmlFor="pitch">
+          <Label className="text-[#D9D9D9] text-[12px]" htmlFor="pitch">
             Brief Pitch
           </Label>
           <textarea
@@ -69,7 +71,7 @@ const Pitch: React.FC = () => {
           ></textarea>
         </div>
         <div className="flex flex-col mt-[6%]">
-          <Label className="text-[#D9D9D9]" htmlFor="files">
+          <Label className="text-[#D9D9D9] text-[12px]" htmlFor="files">
             Upload Files
           </Label>
           <Input

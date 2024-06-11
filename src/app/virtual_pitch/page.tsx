@@ -14,18 +14,18 @@ const VirtualPitch = () => {
         <Separator className="bg-[#505050]" orientation="vertical" />
 
         {/* Image Section */}
-        <div className="py-[100px] w-[30%] mx-auto">
+        <div className="py-[100px] w-[30%] m-auto">
           <Image
             src={'/pitch.svg'}
-            width={600}
+            width={300}
             height={200}
             alt="Project Logo"
-            className="rounded-xl"
+            className="rounded-xl mx-auto my-auto"
           ></Image>
-          <p className=" mt-4 m-1 text-[20px] flex justify-center text-[#D9D9D9]">
+          <p className=" mt-4 m-1 text-[14px] flex justify-center text-[#D9D9D9]">
             "Connect and collaborate with potential clients"
           </p>
-          <p className=" mx-4 text-[15px] flex justify-center text-[#D9D9D9]">
+          <p className=" mx-4 text-[10px] flex justify-center text-[#D9D9D9]">
             Virtually Pitch your business to clients across the world!
           </p>
         </div>
