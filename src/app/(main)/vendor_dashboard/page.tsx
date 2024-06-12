@@ -8,10 +8,6 @@ import { useRouter } from "next/navigation";
 import Pitches from "../page-components/Pitches";
 
 const Dashboard = () => {
-  const router = useRouter();
-  if (!sessionStorage.getItem("userData")) {
-    router.push("/login");
-  }
   const contents = [
     {
       imgPath: "/display-picture/display.png",
