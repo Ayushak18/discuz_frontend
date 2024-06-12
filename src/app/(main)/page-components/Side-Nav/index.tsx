@@ -4,7 +4,14 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
-import { ChevronDown, LayoutDashboard, ListCollapseIcon, LogOut, MessageCircle, Send } from "lucide-react";
+import {
+  ChevronDown,
+  LayoutDashboard,
+  ListCollapseIcon,
+  LogOut,
+  MessageCircle,
+  Send,
+} from "lucide-react";
 
 const SideNav = () => {
   const pathname = usePathname();
@@ -54,20 +61,20 @@ const SideNav = () => {
 
   return (
     <>
-      <div className="bg-[#21262D] w-[100%] h-[98%] my-[1%] ml-2 rounded-3xl pt-4">
-        <div className="flex items-center  h-[80px]  w-[90%] mx-auto   border-[#313843] border-2 rounded-2xl justify-evenly">
-          <img
-            src={"/display-picture/display.png"}
-            className="w-10 h-10 rounded-full"
-            alt="Project Logo"
-          ></img>
-          <div className="flex flex-col ml-1">
-            <p className="text-white text-[14px] font-semibold ">
-              Dency Pambhar
-            </p>
-            <p className="text-[#83899F] text-[12px] ">
-              Client
-            </p>
+      <div className="bg-[#21262D] h-[98vh] my-2 w-[18%] ml-2 rounded-3xl pt-4">
+        <div className="flex items-center p-4 pr-0 mx-[20px] border-[#313843] border-2 rounded-2xl justify-between">
+          <div className="flex items-center">
+            <img
+              src={"/display-picture/display.png"}
+              className="w-10 h-10 rounded-full"
+              alt="Project Logo"
+            ></img>
+            <div className="flex flex-col ml-4">
+              <p className="text-white text-[14px] font-semibold ">
+                Dency Pambhar
+              </p>
+              <p className="text-[#83899F] text-[12px] ">Client</p>
+            </div>
           </div>
           <Button className="flex justify-center items-center">
             <ChevronDown color="white" />
