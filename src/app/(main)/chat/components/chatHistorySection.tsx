@@ -7,10 +7,13 @@ const ChatHistorySection = () => {
   return (
     <>
       <div className=" h-[98vh] w-[70%] my-2 rounded-3xl ml-1 p-4 bg-white">
-        <div>
-          <p className="text-[24px] font-semibold leading-loose">
+        <div className="flex items-center justify-between border-b-2 pb-1">
+          <p className="text-[24px] text-[#676767] font-semibold leading-loose">
             Dency Pambhar
           </p>
+          <Button className="bg-[#1A88E1] text-[#fff] rounded-xl hover:bg-[#1A88E1]">
+            Video Call
+          </Button>
         </div>
         <Separator className="bg-[#d7d7d7]" />
         <div className="h-[90%]  overflow-y-scroll">
