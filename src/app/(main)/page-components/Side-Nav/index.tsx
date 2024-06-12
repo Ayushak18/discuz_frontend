@@ -54,7 +54,7 @@ const SideNav = () => {
 
   return (
     <>
-      <div className="bg-[#21262D] w-[18%] h-[98%] my-[1%] ml-2 rounded-3xl pt-4">
+      <div className="bg-[#21262D] w-[100%] h-[98%] my-[1%] ml-2 rounded-3xl pt-4">
         <div className="flex items-center  h-[80px]  w-[90%] mx-auto   border-[#313843] border-2 rounded-2xl justify-evenly">
           <img
             src={"/display-picture/display.png"}
