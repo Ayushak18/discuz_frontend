@@ -16,8 +16,8 @@ import {
 const SideNav = () => {
   const pathname = usePathname();
   const router = useRouter();
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  // let userData: any = sessionStorage.getItem("userData");
+  // userData = JSON.parse(userData);
 
   const icons = {
     LayoutDashboard,
@@ -32,13 +32,13 @@ const SideNav = () => {
       name: "Dashboard",
       icon: icons.LayoutDashboard,
       isSelected: pathname.includes("dashboard"),
-      url: `${userData?.user?.role.toLowerCase()}_dashboard`,
+      url: `vendor_dashboard`,
     },
     {
       name: "Chats",
       icon: icons.MessageCircle,
       isSelected: pathname.includes("chat"),
-      url: "/chats",
+      url: "/chat",
     },
     {
       name: "My Requirements",
