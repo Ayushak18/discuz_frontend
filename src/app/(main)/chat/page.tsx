@@ -6,7 +6,7 @@ import ChatSection from "./components";
 const Chat = () => {
   return (
     <>
-      <div className="flex h-full justify-between">
+      <div className="flex h-full w-full justify-between">
         <SideNav />
         <ChatSection />
       </div>

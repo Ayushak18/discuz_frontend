@@ -10,6 +10,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Input } from "@/components/ui/input"
 import { CardWithForm } from "../page-components/Card";
+import SideNav from "../page-components/Side-Nav";
+import './dashboard.css';
 
 const Dashboard = () => {
   // const router = useRouter();
@@ -62,9 +64,10 @@ const Dashboard = () => {
   ];
   if (true) {
     return (
-      <>
-        <div className="w-[99%] h-[100%] ">
-          <div className="h-[98%] my-[1.5%] rounded-xl bg-[#fff] ">
+      <div className="flex justify-around">
+      <SideNav />
+        <div className="w-[78%] h-[98vh] my-[1vh]">
+          <div className="rounded-3xl pb-4 bg-[#fff] ">
             <div className="flex items-center w-[92%] justify-between mx-auto pt-4 mb-2">
               <h2 className="text-[#3E435D]  text-[28px] font-semibold">
                 Hello Dency!
@@ -73,7 +76,7 @@ const Dashboard = () => {
                  <Input className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2" type="text" placeholder="Search..." />
               </div>
             </div>
-            <div className="flex flex-row h-[95%]  mx-auto w-[92%]">
+            <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
               <div className="flex flex-row  justify-between flex-wrap">
                 {/* {data?.data?.response?.requirements.map((content:any) => {
                   <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
@@ -85,7 +88,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 };
