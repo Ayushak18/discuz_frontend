@@ -43,7 +43,7 @@ const SideNav = () => {
     {
       name: "My Requirements",
       icon: icons.ListCollapseIcon,
-      isSelected: pathname.includes("requests"),
+      isSelected: pathname.includes("requirements"),
       url: "/requirements",
     },
     {
