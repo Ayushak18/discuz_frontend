@@ -1,79 +1,105 @@
+"use client";
+
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  ChevronDown,
+  LayoutDashboard,
+  ListCollapseIcon,
+  LogOut,
+  MessageCircle,
+  Send,
+} from "lucide-react";
 
 const SideNav = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+  // let userData: any = sessionStorage.getItem("userData");
+  // userData = JSON.parse(userData);
+
+  const icons = {
+    LayoutDashboard,
+    MessageCircle,
+    ListCollapseIcon,
+    Send,
+    LogOut,
+  };
+
+  let options = [
+    {
+      name: "Dashboard",
+      icon: icons.LayoutDashboard,
+      isSelected: pathname.includes("dashboard"),
+      url: `vendor_dashboard`,
+    },
+    {
+      name: "Chats",
+      icon: icons.MessageCircle,
+      isSelected: pathname.includes("chat"),
+      url: "/chat",
+    },
+    {
+      name: "My Requirements",
+      icon: icons.ListCollapseIcon,
+      isSelected: pathname.includes("requests"),
+      url: "/requirements",
+    },
+    {
+      name: "Requests",
+      icon: icons.Send,
+      isSelected: pathname.includes("profile"),
+      url: "/requests",
+    },
+    {
+      name: "Log Out",
+      icon: icons.LogOut,
+      url: `/login`,
+    },
+  ];
+
   return (
     <>
-      <div className="bg-[#fff] w-[18%] h-[100vh] m-[1rem] rounded-3xl py-[1rem]">
-        <div className="flex items-center justify-center">
-          <Image
-            src={"/Project_Logo.svg"}
-            width={50}
-            height={100}
-            alt="Project Logo"
-          ></Image>
-          <h1 className="text-[#717171] text-[30px] ml-[10px] font-bold">
-            Discuz Pro
-          </h1>
+      <div className="bg-[#21262D] h-[98vh] my-2 w-[400px] ml-2 rounded-3xl pt-4">
+        <div className="flex items-center p-4 pr-0 mx-[20px] border-[#313843] border-2 rounded-2xl justify-between">
+          <div className="flex items-center">
+            <img
+              src={"/display-picture/display.png"}
+              className="w-10 h-10 rounded-full"
+              alt="Project Logo"
+            ></img>
+            <div className="flex flex-col ml-4">
+              <p className="text-white text-[14px] font-semibold ">
+                Dency Pambhar
+              </p>
+              <p className="text-[#83899F] text-[12px] ">Client</p>
+            </div>
+          </div>
+          <Button className="flex justify-center items-center">
+            <ChevronDown color="white" />
+          </Button>
         </div>
-        <Separator className="bg-[#d7d7d7] w-[90%] mx-auto h-[0.2rem] text-center " />
-        {/* Side Nav Buttons */}
-        <div>
-          <div className="py-[0.5rem] px-[1rem] shadow-lg cursor-pointer  rounded-2xl text-[#676767] mx-[1.5rem] my-[1.5rem] flex items-center">
-            <Image
-              src={"/dashboard-vendor/home.svg"}
-              width={30}
-              height={100}
-              alt="Home Logo"
-            ></Image>
-            <Button className="text-[18px] font-bold">Home</Button>
-          </div>
-          <div className="py-[0.5rem] px-[1rem] shadow-lg cursor-pointer  rounded-2xl  text-[#676767] mx-[1.5rem] my-[1.5rem] flex items-center">
-            <Image
-              src={"/dashboard-vendor/dashboard.svg"}
-              width={30}
-              height={100}
-              alt="Dashboard Logo"
-            ></Image>
-            <Button className="text-[18px] font-bold">Dashboard</Button>
-          </div>
-          <div className="py-[0.5rem] px-[1rem] shadow-lg cursor-pointer bg-[#1A88E1]  rounded-2xl text-[#ffffff] mx-[1.5rem] my-[1.5rem] flex items-center">
-            <Image
-              src={"/dashboard-vendor/settings.svg"}
-              width={30}
-              height={100}
-              alt="Settings Logo"
-            ></Image>
-            <Button className="text-[18px] font-bold">Settings</Button>
-          </div>
-          <div className="py-[0.5rem] px-[1rem] shadow-lg cursor-pointer  rounded-2xl text-[#676767] mx-[1.5rem] my-[1.5rem] flex items-center">
-            <Image
-              src={"/dashboard-vendor/chat.svg"}
-              width={30}
-              height={100}
-              alt="Chat Logo"
-            ></Image>
-            <Button className="text-[18px] font-bold">Chats</Button>
-          </div>
-          <div className="py-[0.5rem] px-[1rem] shadow-lg cursor-pointer  rounded-2xl text-[#676767] mx-[1.5rem] my-[1.5rem] flex items-center">
-            <Image
-              src={"/dashboard-vendor/requests.svg"}
-              width={30}
-              height={100}
-              alt="Requests Logo"
-            ></Image>
-            <Button className="text-[18px] font-bold">Requests</Button>
-          </div>
-          <div className="py-[0.5rem] px-[1rem] shadow-lg cursor-pointer  rounded-2xl text-[#676767] mx-[1.5rem] my-[1.5rem] flex items-center">
-            <Image
-              src={"/dashboard-vendor/profile.svg"}
-              width={30}
-              height={100}
-              alt="Profile Logo"
-            ></Image>
-            <Button className="text-[18px] font-bold">Profile</Button>
-          </div>
+        <div className="mt-4">
+          {options.map((option) => (
+            <div
+              onClick={() => {
+                router.push(option.url);
+                if (option.name === "Log Out") {
+                  sessionStorage.removeItem("userData");
+                }
+              }}
+              key={option.name}
+              className={` ${
+                option.isSelected ? "text-[#1A88E1]" : "text-[#ffffff]"
+              } cursor-pointer hover:text-[#1A88E1] w-[80%] rounded-2xl flex items-center mx-auto`}
+            >
+              <option.icon className="mr-2" />
+              <Button className="lg:text-[16px] md:text-[12px]">
+                {option.name}
+              </Button>
+            </div>
+          ))}
         </div>
       </div>
     </>

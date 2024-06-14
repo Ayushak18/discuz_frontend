@@ -12,12 +12,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="bg-[#b5c2ca]">
-        <div className="flex">
-          <SideNav />
-          {children}
-        </div>
+    <html lang="en" className="h-full">
+      <body className="bg-[#b5c2ca] h-full">
+        {/* <div className="flex min-h-screen h-full"> */}
+        {/* <SideNav /> */}
+        <div className="flex-grow">{children}</div>
+        {/* </div> */}
       </body>
     </html>
   );
