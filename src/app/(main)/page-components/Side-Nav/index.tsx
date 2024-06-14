@@ -49,7 +49,7 @@ const SideNav = () => {
     {
       name: "Requests",
       icon: icons.Send,
-      isSelected: pathname.includes("profile"),
+      isSelected: pathname.includes("requests"),
       url: "/requests",
     },
     {

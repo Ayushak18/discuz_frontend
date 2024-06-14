@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import SideNav from "../page-components/Side-Nav";
+import { Input } from "@/components/ui/input";
+import { CardWithForm } from "../page-components/Card";
 
 const Requests = () => {
   const router = useRouter();
@@ -26,17 +29,10 @@ const Requests = () => {
 
   // console.log(data?.data?.response?.requirements);
 
-  const requests = [
+  const contents = [
     {
       imgPath: "/display-picture/display.png",
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-      budget: "200k-300k",
-    },
-    {
-      imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
@@ -44,6 +40,7 @@ const Requests = () => {
     },
     {
       imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
@@ -51,6 +48,7 @@ const Requests = () => {
     },
     {
       imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
@@ -58,41 +56,7 @@ const Requests = () => {
     },
     {
       imgPath: "/display-picture/display.png",
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
@@ -100,36 +64,41 @@ const Requests = () => {
     },
   ];
 
-  if (data) {
+  if (true) {
     return (
       <>
-        <div className="w-[80%]">
-          <div className="m-[1rem] ml-0 py-[1.8%] px-[2%] h-[96vh] rounded-xl bg-[#fff] ">
-            <div className="flex items-center justify-between mb-[0.3rem]">
-              <h2 className="text-[#717171] text-[28px] font-bold">Requests</h2>
-              <Image
-                className="cursor-pointer"
-                src={"/dashboard-vendor/expand.svg"}
-                width={20}
-                height={100}
-                alt="Project Logo"
-              ></Image>
-            </div>
-            <Separator className="bg-[#d7d7d7] mx-auto h-[0.2rem] text-center " />
-            <div className="flex flex-col h-[90%] w-[100%]">
-              <div className="flex flex-col flex-wrap w-[100%] h-[90%] m-0">
-                {requests.map((request: any) => {
-                  return <ContentTile content={request} />;
-                })}
+        <div className="flex justify-around">
+          <SideNav />
+          <div className="w-[78%] h-[98vh] my-[1vh]">
+            <div className="rounded-3xl pb-4 bg-[#fff] ">
+              <div className="flex items-center w-[92%] justify-between mx-auto pt-4 mb-2">
+                <h2 className="text-[#3E435D]  text-[28px] font-semibold">
+                  Hello Dency!
+                </h2>
+                <div className="flex w-[25%]">
+                  <Input
+                    className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2"
+                    type="text"
+                    placeholder="Search..."
+                  />
+                </div>
               </div>
-              <div className="h-[10%] flex items-center justify-center m-0">
-                <Button className="flex justify-center items-center">
-                  <p className="font-bold text-gray-500">Load More</p>
-                  <img
-                    src={"/dashboard-vendor/downarrow.svg"}
-                    className="w-4 h-4 ml-2"
-                  ></img>
-                </Button>
+              <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
+                <div className="flex flex-row  justify-between flex-wrap">
+                  {/* {data?.data?.response?.requirements.map((content:any) => {
+                  <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
+                })} */}
+                  {contents.map((content: any) => {
+                    return (
+                      <CardWithForm
+                        image={content.imgPath}
+                        isRequested={!content.isAccepted}
+                        title={content.title}
+                        description={content.description}
+                      />
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
