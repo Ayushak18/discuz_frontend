@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { CardWithForm } from "../page-components/Card";
 import SideNav from "../page-components/Side-Nav";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 const Requirements = () => {
   const contents = [
@@ -47,12 +49,17 @@ const Requirements = () => {
               <h2 className="text-[#3E435D]  text-[28px] font-semibold">
                 Hello Dency!
               </h2>
-              <div className="flex w-[25%]">
+              <div className="flex w-[35%]">
                 <Input
                   className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2"
                   type="text"
                   placeholder="Search..."
                 />
+                <Link href={"/post_requirement"}>
+                  <Button className="cursor-pointer hover:bg-blue-500 bg-blue-500 text-[#fff] rounded-2xl ml-4">
+                    Post Requirement
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
