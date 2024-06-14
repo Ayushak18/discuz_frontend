@@ -1,10 +1,10 @@
 import ChatHistorySection from "./chatHistorySection";
 import ChatList from "./chatList";
 
-const Chat = () => {
+const ChatSection = () => {
   return (
     <>
-      <div className="flex h-[100%] w-[85%] justify-around">
+      <div className="flex h-[100%] w-[100%] justify-around">
         <ChatHistorySection />
         <ChatList />
       </div>
@@ -12,4 +12,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default ChatSection;

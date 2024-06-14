@@ -1,17 +1,17 @@
 "use client";
 
 import SideNav from "../page-components/Side-Nav";
-import ChatHistorySection from "./components";
+import ChatSection from "./components";
 
-const chat = () => {
+const Chat = () => {
   return (
     <>
       <div className="flex h-full justify-between">
         <SideNav />
-        <ChatHistorySection />
+        <ChatSection />
       </div>
     </>
   );
 };
 
-export default chat;
+export default Chat;
