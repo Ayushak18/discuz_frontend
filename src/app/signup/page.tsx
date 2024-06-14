@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const SignUp = () => {
   const router = useRouter();
@@ -57,37 +56,17 @@ const SignUp = () => {
     },
   });
 
-  const {
-    mutate: createChatUser,
-    isError: chatUserError,
-    isSuccess: chatUserSuccess,
-  }: any = useMutation({
-    mutationFn: (newChatUser) => {
-      return axios
-        .post("http://localhost:3000/authenticate", newChatUser)
-        .then((resposne) => console.log(resposne));
-    },
-  });
-  // console.log("Is pending");
-  // console.log(isPending);
-  // console.log("Is success");
-  // console.log(isSuccess ? notify() : "");
   if (isSuccess) {
     notify();
-    if (chatUserSuccess) {
+    if (isSuccess) {
       setTimeout(() => {
         router.push("/login");
       }, 2000);
     } else {
-      console.log(chatUserError);
+      console.log(isError);
+      error();
     }
-  } else if (isError) {
-    error();
   }
-
-  useEffect(() => {
-    createChatUser({ username: data?.user?.email, secret: data?.user?.email });
-  }, [isSuccess === true]);
 
   return (
     <>
@@ -102,7 +81,8 @@ const SignUp = () => {
                 Account
               </h2>
               <p className="text-[#D9D9D9] text-[18px] font-medium">
-                Start {" "}<span className="text-blue-500 font-bold">7 days</span>{" "} free trial
+                Start <span className="text-blue-500 font-bold">7 days</span>{" "}
+                free trial
               </p>
               <p className="text-[#D9D9D9] text-[14px] font-light ">
                 Get your business listed and have multiple opportunities
