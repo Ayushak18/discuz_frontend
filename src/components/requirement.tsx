@@ -45,10 +45,11 @@ const Requirement: React.FC = () => {
   };
   let user: any = sessionStorage.getItem("userData");
   user = JSON.parse(user);
+  console.log(user);
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (requirement) => {
       return axios
-        .post("http://3.6.132.27/api/requirements/post", requirement)
+        .post("http://localhost:3000/requirements/post", requirement)
         .then((res) => res.data);
     },
   });
@@ -56,7 +57,7 @@ const Requirement: React.FC = () => {
   if (isSuccess) {
     notify();
     setTimeout(() => {
-      router.push("/client_dashboard");
+      router.push("/requirements");
     }, 2000);
   } else if (isError) {
     error();
@@ -85,11 +86,13 @@ const Requirement: React.FC = () => {
                 budget_min: event.target.min_budget.value,
                 budget_max: event.target.max_budget.value,
                 isAccepted: false,
-                sector: event.target.sector.value,
+                req_sector: event.target.sector.value,
+                organisation_id: user?.user?.organisation_id,
+                organisation_email: user?.user?.email,
               });
 
               // console.log(user.user.email);
-              // console.log(event.target.product.value);
+              // console.log(event.target.sector.value);
               // console.log(event.target.description.value);
               // console.log(event.target.min_budget.value);
               // console.log(event.target.max_budget.value);
@@ -127,7 +130,7 @@ const Requirement: React.FC = () => {
                       Human Resource
                     </SelectItem>
                     <SelectItem value="Manufacturing">Manufacturing</SelectItem>
-                    <SelectItem value="Auto Mobiles">Auto Mobiles</SelectItem>
+                    <SelectItem value="Automobile">Auto Mobiles</SelectItem>
                     <SelectItem value="Furniture">Furniture</SelectItem>
                   </SelectGroup>
                 </SelectContent>
