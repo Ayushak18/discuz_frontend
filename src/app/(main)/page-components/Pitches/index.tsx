@@ -1,6 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import ContentTile from "../content-tile";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const Pitches = (props: any) => {
   //   const data = props;
@@ -44,9 +45,9 @@ const Pitches = (props: any) => {
 
   return (
     <>
-      <div className="m-[1rem] ml-0 mt-0 px-[1.5rem] pt-[1rem] h-[45vh] rounded-xl w-[100%] bg-[#fff]">
-        <div className="flex items-center justify-between mb-[0.3rem]">
-          <h2 className="text-[#717171] text-[28px] font-bold">My Pitches</h2>
+      <div className="w-full ml-1 bg-[#fff] h-[46vh] my-2 rounded-3xl p-4">
+        <div className="flex justify-between">
+          <h2 className="text-[#717171] text-[28px] font-bold"> My Pitches</h2>
           <Image
             className="cursor-pointer"
             src={"/dashboard-vendor/expand.svg"}
@@ -55,18 +56,22 @@ const Pitches = (props: any) => {
             alt="Project Logo"
           ></Image>
         </div>
-        <Separator className="bg-[#d7d7d7] mx-auto h-[0.2rem] text-center " />
-        <div className="flex flex-col flex-wrap w-[100%] h-[100%] overflow-hidden my-[2%] py-[1%]">
-          {contents.map((request: any) => {
-            return <ContentTile content={request} />;
-            // console.log("Ayush");
-            // console.log(request);
-            // if (request?.isAccepted) {
-            //   return <></>;
-            // } else {
-            //   return <ContentTile content={request} />;
-            // }
-          })}
+        <Separator className="bg-[#d7d7d7] my-2 mx-auto h-[0.2rem] text-center " />
+        <div className="flex flex-col h-[90%] w-[100%]">
+          <div className="flex flex-col flex-wrap w-[100%] h-[90%] m-0">
+            {contents.map((content) => {
+              return <ContentTile content={content} />;
+            })}
+          </div>
+          <div className="h-[10%] flex items-center justify-center m-0">
+            <Button className="flex mb-8 justify-center items-center">
+              <p className="font-bold text-gray-500">Load More</p>
+              <img
+                src={"/dashboard-vendor/downarrow.svg"}
+                className="w-4 h-4 ml-2"
+              ></img>
+            </Button>
+          </div>
         </div>
       </div>
     </>

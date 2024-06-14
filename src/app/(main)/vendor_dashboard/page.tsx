@@ -1,11 +1,9 @@
 "use client";
-import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import Messages from "../page-components/Messages";
 import { Button } from "@/components/ui/button";
 import ContentTile from "../page-components/content-tile";
-import { useRouter } from "next/navigation";
 import Pitches from "../page-components/Pitches";
+import SideNav from "../page-components/Side-Nav";
 
 const Dashboard = () => {
   const contents = [
@@ -44,39 +42,32 @@ const Dashboard = () => {
   ];
   return (
     <>
-      <div className="w-[80%]">
-        <div className="m-[1rem] ml-0 px-[2%] py-[1%] h-[50vh] rounded-xl bg-[#fff]">
-          <div className="flex items-center justify-between mb-[0.3rem]">
-            <h2 className="text-[#717171] text-[28px] font-bold">Dashboard</h2>
-            {/* <Image
-              className="cursor-pointer"
-              src={"/dashboard-vendor/add.svg"}
-              width={35}
-              height={100}
-              alt="Project Logo"
-            ></Image> */}
-          </div>
-          <Separator className="bg-[#d7d7d7] mx-auto h-[0.2rem] text-center " />
-          <div className="flex flex-col h-[90%] w-[100%]">
-            <div className="flex flex-col flex-wrap w-[100%] h-[90%] m-0">
-              {contents.map((content) => {
-                return <ContentTile content={content} />;
-              })}
-            </div>
-            <div className="h-[10%] flex items-center justify-center m-0">
-              <Button className="flex justify-center items-center">
-                <p className="font-bold text-gray-500">Load More</p>
-                <img
-                  src={"/dashboard-vendor/downarrow.svg"}
-                  className="w-4 h-4 ml-2"
-                ></img>
-              </Button>
+      <div className="flex">
+        <SideNav />
+        <div className="w-full mx-2 flex flex-col items-center">
+          <div className="w-full ml-2 bg-[#fff] h-[50vh] my-2 rounded-3xl p-4">
+            <h2 className="text-[#717171] text-[28px] font-bold"> Dashboard</h2>
+            <Separator className="bg-[#d7d7d7] my-2 mx-auto h-[0.2rem] text-center " />
+            <div className="flex flex-col h-[90%] w-[100%]">
+              <div className="flex flex-col flex-wrap w-[100%] h-[90%] m-0">
+                {contents.map((content) => {
+                  return <ContentTile content={content} />;
+                })}
+              </div>
+              <div className="h-[10%] flex items-center justify-center m-0">
+                <Button className="flex mb-8 justify-center items-center">
+                  <p className="font-bold text-gray-500">Load More</p>
+                  <img
+                    src={"/dashboard-vendor/downarrow.svg"}
+                    className="w-4 h-4 ml-2"
+                  ></img>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex">
-          {/* <Messages /> */}
-          <Pitches />
+          <div className="w-full">
+            <Pitches />
+          </div>
         </div>
       </div>
     </>
