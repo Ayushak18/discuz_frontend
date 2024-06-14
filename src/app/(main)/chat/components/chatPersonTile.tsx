@@ -2,7 +2,7 @@ const ChatPersonTile = () => {
   return (
     <>
       <div className="flex items-center w-[100%] p-4 bg-[#fff] border-2 rounded-2xl my-2 cursor-pointer">
-        <div className="w-[10%]">
+        <div>
           <img
             src={"/display-picture/display.png"}
             className="w-10 h-10 rounded-full"
