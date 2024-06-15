@@ -34,20 +34,16 @@ export function CardWithForm({
             <p>{title}</p>
           </div>
           <div className="flex flex-col  text-justify leading-tight">
-            <p className="line-clamp-4">{description}</p>
+            <p className="line-clamp-6">{description}</p>
           </div>
         </div>
-        <Button className="bg-blue-500 hover:bg-blue-500 text-[#fff] rounded mt-4">
+        <Button className="bg-blue-500 hover:bg-blue-500 p-1 px-2 h-6 text-[#fff] rounded-full mt-4">
           Read More
         </Button>
       </CardContent>
-      <CardFooter
-        className={`${isRequested ? "flex" : "hidden"}  justify-between`}
-      >
+      <CardFooter className={` ${isRequested ? "flex" : "hidden"}  flex items-center justify-between`}>
         <Button className="text-blue-500">Decline Request</Button>
-        <Button className="bg-gray-100 hover:bg-gray-200 rounded-full">
-          Accept Request
-        </Button>
+        <Button className="bg-gray-100 hover:bg-gray-200 rounded-full"> Accept Request</Button>
       </CardFooter>
     </Card>
   );
