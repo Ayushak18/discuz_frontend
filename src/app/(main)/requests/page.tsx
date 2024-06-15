@@ -23,11 +23,18 @@ const Requests = () => {
 
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["requirements-requests"],
-    queryFn: () =>
-      axios.get(`http://3.6.132.27/api/requirements/${userData.user.email}`),
+    queryFn: async () => {
+      const response = await axios.post(
+        `http://localhost:3000/virtual_pitch/email`,
+        {
+          company_email: "a@g.com",
+        }
+      );
+      return response.data;
+    },
   });
 
-  // console.log(data?.data?.response?.requirements);
+  console.log(data);
 
   const contents = [
     {
