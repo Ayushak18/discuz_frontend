@@ -1,77 +1,107 @@
 "use client";
+import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
+import Messages from "../page-components/Messages";
+import Requests from "../page-components/Requests";
 import ContentTile from "../page-components/content-tile";
-import Pitches from "../page-components/Pitches";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { Input } from "@/components/ui/input";
+import { CardWithForm } from "../page-components/Card";
 import SideNav from "../page-components/Side-Nav";
+import "../../../../public/style/scroll-bar.css";
 
 const Dashboard = () => {
+  // const router = useRouter();
+  // if (!sessionStorage.getItem("userData")) {
+  //   router.push("/login");
+  // }
+
+  let userData: any = sessionStorage.getItem("userData");
+  userData = JSON.parse(userData);
+
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["requirements-requests"],
+    queryFn: () =>
+      axios.get(`http://3.6.132.27/api/requirements/${userData.user.email}`),
+  });
+
   const contents = [
     {
       imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
       date: "12 March 2024",
-      width: "47%",
     },
     {
       imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
       date: "12 March 2024",
-      width: "47%",
     },
     {
       imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
       date: "12 March 2024",
-      width: "47%",
     },
     {
       imgPath: "/display-picture/display.png",
+      isAccepted: true,
       title: "ABC Company",
       description:
         "Description about the company and the project it is offering ...",
       date: "12 March 2024",
-      width: "47%",
     },
   ];
-  return (
-    <>
-      <div className="flex">
+  if (true) {
+    return (
+      <div className="flex justify-around">
         <SideNav />
-        <div className="w-full mx-2 flex flex-col items-center">
-          <div className="w-full ml-2 bg-[#fff] h-[50vh] my-2 rounded-3xl p-4">
-            <h2 className="text-[#717171] text-[28px] font-bold"> Dashboard</h2>
-            <Separator className="bg-[#d7d7d7] my-2 mx-auto h-[0.2rem] text-center " />
-            <div className="flex flex-col h-[90%] w-[100%]">
-              <div className="flex flex-col flex-wrap w-[100%] h-[90%] m-0">
-                {contents.map((content) => {
-                  return <ContentTile content={content} />;
-                })}
+        <div className="w-[78%] h-[98vh] my-[1vh]">
+          <div className="rounded-3xl pb-4 bg-[#fff] ">
+            <div className="flex items-center w-[92%] justify-between mx-auto pt-4 mb-2">
+              <h2 className="text-[#3E435D]  text-[28px] font-semibold">
+                Hello Dency!
+              </h2>
+              <div className="flex w-[25%]">
+                <Input
+                  className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2"
+                  type="text"
+                  placeholder="Search..."
+                />
               </div>
-              <div className="h-[10%] flex items-center justify-center m-0">
-                <Button className="flex mb-8 justify-center items-center">
-                  <p className="font-bold text-gray-500">Load More</p>
-                  <img
-                    src={"/dashboard-vendor/downarrow.svg"}
-                    className="w-4 h-4 ml-2"
-                  ></img>
-                </Button>
+            </div>
+            <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
+              <div className="flex flex-row  justify-between flex-wrap">
+                {/* {data?.data?.response?.requirements.map((content:any) => {
+                  <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
+                })} */}
+                {contents.map((content: any) => {
+                  return (
+                    <CardWithForm
+                      image={content.imgPath}
+                      isRequested={!content.isAccepted}
+                      title={content.title}
+                      description={content.description}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
-          <div className="w-full">
-            <Pitches />
-          </div>
         </div>
       </div>
-    </>
-  );
+    );
+  }
 };
 
 export default Dashboard;
