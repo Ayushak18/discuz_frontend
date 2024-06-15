@@ -10,41 +10,6 @@ import "../../../../public/style/scroll-bar.css";
 import "../../../../public/style/spinner.css";
 
 const Requirements = () => {
-  const contents = [
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-  ];
-
   let userData: any = sessionStorage.getItem("userData");
   userData = JSON.parse(userData);
 
@@ -104,7 +69,7 @@ const Requirements = () => {
                   {data?.data?.map((content: any) => {
                     return (
                       <CardWithForm
-                        image={content.imgPath}
+                        image={content.imgPath || "/images/image.png"}
                         isRequested={false}
                         title={content.product}
                         description={content.product_desc}
