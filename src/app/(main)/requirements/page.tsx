@@ -14,7 +14,7 @@ const Requirements = () => {
   userData = JSON.parse(userData);
 
   const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ["requirements-requests"],
+    queryKey: ["requirements"],
     queryFn: async () => {
       const response = await axios.post(
         `http://localhost:3000/requirements/email`,
