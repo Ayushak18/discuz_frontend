@@ -9,6 +9,7 @@ import axios from "axios";
 import SideNav from "../page-components/Side-Nav";
 import { Input } from "@/components/ui/input";
 import { CardWithForm } from "../page-components/Card";
+import "../../../../public/style/scroll-bar.css";
 
 const Requests = () => {
   const router = useRouter();
@@ -22,12 +23,12 @@ const Requests = () => {
   // console.log(userData.user.email);
 
   const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ["requirements-requests"],
+    queryKey: ["requirements_for_vendor"],
     queryFn: async () => {
       const response = await axios.post(
-        `http://localhost:3000/virtual_pitch/email`,
+        `http://localhost:3000/requirements/sector`,
         {
-          company_email: "a@g.com",
+          req_sector: "Automobile",
         }
       );
       return response.data;
@@ -78,7 +79,7 @@ const Requests = () => {
           <SideNav />
           <div className="w-[78%] h-[98vh] my-[1vh]">
             <div className="rounded-3xl pb-4 bg-[#fff] ">
-              <div className="flex items-center w-[92%] justify-between mx-auto pt-4 mb-2">
+              <div className="flex items-center w-[97%] justify-between mx-auto pt-4 mb-2">
                 <h2 className="text-[#3E435D]  text-[28px] font-semibold">
                   Hello Dency!
                 </h2>
@@ -90,18 +91,19 @@ const Requests = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
+              <Separator className="bg-[#d7d7d7] w-[97%] mx-auto my-2  h-[2px]" />
+              <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[97%]">
                 <div className="flex flex-row  justify-between flex-wrap">
                   {/* {data?.data?.response?.requirements.map((content:any) => {
                   <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
                 })} */}
-                  {contents.map((content: any) => {
+                  {data?.data?.map((content: any) => {
                     return (
                       <CardWithForm
-                        image={content.imgPath}
-                        isRequested={!content.isAccepted}
-                        title={content.title}
-                        description={content.description}
+                        image={content.imgPath || "/images/image.png"}
+                        isRequested={false}
+                        title={content.product}
+                        description={content.product_desc}
                       />
                     );
                   })}
