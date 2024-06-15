@@ -41,10 +41,14 @@ const SideNav = () => {
       url: "/chat",
     },
     {
-      name: "My Requirements",
+      name: `${
+        userData?.user?.role === "Client" ? "My Requirements" : "My Pitches"
+      }`,
       icon: icons.ListCollapseIcon,
-      isSelected: pathname.includes("requirements"),
-      url: "/requirements",
+      isSelected: pathname.includes("requirements" || "pitches"),
+      url: `${
+        userData?.user?.role === "Client" ? "/requirements" : "/pitches"
+      }`,
     },
     {
       name: "Requests",
