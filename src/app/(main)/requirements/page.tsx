@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import "../../../../public/style/scroll-bar.css";
 
 const Requirements = () => {
   const contents = [

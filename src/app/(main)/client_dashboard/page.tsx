@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 import { CardWithForm } from "../page-components/Card";
 import SideNav from "../page-components/Side-Nav";
-import './dashboard.css';
+import "../../../../public/style/scroll-bar.css";
 
 const Dashboard = () => {
   // const router = useRouter();
@@ -65,7 +65,7 @@ const Dashboard = () => {
   if (true) {
     return (
       <div className="flex justify-around">
-      <SideNav />
+        <SideNav />
         <div className="w-[78%] h-[98vh] my-[1vh]">
           <div className="rounded-3xl pb-4 bg-[#fff] ">
             <div className="flex items-center w-[92%] justify-between mx-auto pt-4 mb-2">
@@ -73,7 +73,11 @@ const Dashboard = () => {
                 Hello Dency!
               </h2>
               <div className="flex w-[25%]">
-                 <Input className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2" type="text" placeholder="Search..." />
+                <Input
+                  className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2"
+                  type="text"
+                  placeholder="Search..."
+                />
               </div>
             </div>
             <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
@@ -81,8 +85,15 @@ const Dashboard = () => {
                 {/* {data?.data?.response?.requirements.map((content:any) => {
                   <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
                 })} */}
-                {contents.map((content:any) => {
-                  return  <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
+                {contents.map((content: any) => {
+                  return (
+                    <CardWithForm
+                      image={content.imgPath}
+                      isRequested={!content.isAccepted}
+                      title={content.title}
+                      description={content.description}
+                    />
+                  );
                 })}
               </div>
             </div>
