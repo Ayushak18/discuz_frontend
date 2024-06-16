@@ -1,17 +1,21 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import ExpandedVendorTile from "../ExpandedPage";
+import { useEffect, useState } from "react";
 
 export function CardWithForm({
   image,
   isRequested,
   title,
   description,
+  setShowTile,
 }: {
   image: any;
   isRequested: any;
   title: any;
   description: any;
+  setShowTile: any;
 }) {
   return (
     <Card
@@ -35,7 +39,10 @@ export function CardWithForm({
             <p className="line-clamp-2">{description}</p>
           </div>
         </div>
-        <Button className="bg-blue-500 hover:bg-blue-500 p-1 px-2 h-6 text-[#fff] rounded-full mt-4">
+        <Button
+          onClick={() => setShowTile(true)}
+          className="bg-blue-500 hover:bg-blue-500 p-1 px-2 h-6 text-[#fff] rounded-full mt-4"
+        >
           Read More
         </Button>
       </CardContent>
