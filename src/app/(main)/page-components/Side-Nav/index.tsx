@@ -32,7 +32,7 @@ const SideNav = () => {
       name: "Dashboard",
       icon: icons.LayoutDashboard,
       isSelected: pathname.includes("dashboard"),
-      url: `${userData?.user?.role.toLowerCase()}_dashboard`,
+      url: `/${userData?.user?.role.toLowerCase()}_dashboard`,
     },
     {
       name: "Chats",
