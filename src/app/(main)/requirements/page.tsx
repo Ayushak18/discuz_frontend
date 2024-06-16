@@ -62,7 +62,7 @@ const Requirements = () => {
                 </div>
               </div>
               <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
-                <div className="flex flex-row  justify-between flex-wrap">
+                <div className="flex flex-wrap content-start [&>*:nth-child(3n+1)]:ml-0">
                   {/* {data?.data?.response?.requirements.map((content:any) => {
                     <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
                   })} */}
