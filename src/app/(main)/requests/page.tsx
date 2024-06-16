@@ -35,43 +35,6 @@ const Requests = () => {
     },
   });
 
-  console.log(data);
-
-  const contents = [
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-    {
-      imgPath: "/display-picture/display.png",
-      isAccepted: true,
-      title: "ABC Company",
-      description:
-        "Description about the company and the project it is offering ...",
-      date: "12 March 2024",
-    },
-  ];
-
   if (true) {
     return (
       <>
@@ -93,10 +56,7 @@ const Requests = () => {
               </div>
               <Separator className="bg-[#d7d7d7] w-[97%] mx-auto my-2  h-[2px]" />
               <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[97%]">
-                <div className="flex flex-row  justify-between flex-wrap">
-                  {/* {data?.data?.response?.requirements.map((content:any) => {
-                  <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
-                })} */}
+                <div className="flex flex-row  content-start flex-wrap [&>*:nth-child(3n+1)]:ml-0">
                   {data?.data?.map((content: any) => {
                     return (
                       <CardWithForm

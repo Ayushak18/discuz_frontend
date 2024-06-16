@@ -68,7 +68,7 @@ const Dashboard = () => {
         <SideNav />
         <div className="w-[78%] h-[98vh] my-[1vh]">
           <div className="rounded-3xl pb-4 bg-[#fff] ">
-            <div className="flex items-center w-[92%] justify-between mx-auto pt-4 mb-2">
+            <div className="flex items-center w-[97%] justify-between mx-auto pt-4 mb-2">
               <h2 className="text-[#3E435D]  text-[28px] font-semibold">
                 Hello Dency!
               </h2>
@@ -80,8 +80,9 @@ const Dashboard = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
-              <div className="flex flex-row  justify-between flex-wrap">
+            <Separator className="bg-[#d7d7d7] w-[97%] mx-auto my-2  h-[2px]" />
+            <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[97%]">
+              <div className="flex content-start [&>*:nth-child(3n+1)]:ml-0 flex-wrap">
                 {/* {data?.data?.response?.requirements.map((content:any) => {
                   <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
                 })} */}
