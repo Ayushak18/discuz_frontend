@@ -17,6 +17,7 @@ const Requirements = () => {
   userData = JSON.parse(userData);
 
   const [showTile, setShowTile] = useState(false);
+  const [reqData, setReqData] = useState(undefined);
 
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["requirements"],
@@ -49,7 +50,7 @@ const Requirements = () => {
           <>
             <div className="flex justify-around">
               <SideNav />
-              <ExpandedVendorTile setShowTile={setShowTile} />
+              <ExpandedVendorTile reqData={reqData} setShowTile={setShowTile} />
             </div>
           </>
         ) : (
@@ -86,6 +87,8 @@ const Requirements = () => {
                             title={content.product}
                             description={content.product_desc}
                             setShowTile={setShowTile}
+                            data={content}
+                            setReqData={setReqData}
                           />
                         );
                       })}

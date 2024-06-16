@@ -10,12 +10,16 @@ export function CardWithForm({
   title,
   description,
   setShowTile,
+  data,
+  setReqData,
 }: {
   image: any;
   isRequested: any;
   title: any;
   description: any;
   setShowTile: any;
+  data: any;
+  setReqData: any;
 }) {
   return (
     <Card
@@ -40,7 +44,10 @@ export function CardWithForm({
           </div>
         </div>
         <Button
-          onClick={() => setShowTile(true)}
+          onClick={() => {
+            setShowTile(true);
+            setReqData(data);
+          }}
           className="bg-blue-500 hover:bg-blue-500 p-1 px-2 h-6 text-[#fff] rounded-full mt-4"
         >
           Read More
