@@ -15,7 +15,7 @@ export function CardWithForm({
 }) {
   return (
     <Card
-      className={`w-[30%] max-h-[270px] my-4 mx-4  flex flex-col justify-between rounded-2xl `}
+      className={`w-[30%] min-w-[270px] my-4 mx-4  flex flex-col justify-between rounded-2xl `}
     >
       <div className="bg-gradient-to-r from-[#8fbcec] to-[#fdf8e3] p-2  h-[60px] relative px-4 rounded-t-2xl ">
         <div className="p-2 rounded-xl border-gray-300 mt-5 bg-white border-2 w-fit">
