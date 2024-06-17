@@ -10,6 +10,8 @@ import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import SideNav from "../page-components/Side-Nav";
+import { Pencil } from "lucide-react";
+import { Content } from "@radix-ui/react-accordion";
 const Profile = () => {
   const router = useRouter();
   // if (!sessionStorage.getItem("userData")) {
@@ -29,8 +31,9 @@ const Profile = () => {
   //       .get(`http://3.6.132.27/api/user/${email}/${role}`)
   //       .then((res) => res.data),
   // });
-
+ 
   return (
+       
     <div className="flex justify-around">
     <SideNav />
       <div className="w-[78%] h-[98vh] mt-[1vh] rounded-2xl bg-[white]">
@@ -45,11 +48,12 @@ const Profile = () => {
           <div className="w-[70%] flex flex-col border-2 border-gray-200 rounded-2xl p-4  mx-auto mt-8">
             <div className="flex flex-row justify-between">
               <img src='./display-picture/display.png' className="w-20 h-20 rounded-full "></img>
-              <div className="my-auto w-[75%]">
+              <div className="my-auto w-[70%]">
                 <p className="font-semibold text-[16px]">Dency Pambhar</p>
                 <p className="text-[14px] text-gray-400">dency@gmail.com</p>
               </div>
-              <Button className="bg-blue-500 text-white font-light rounded-xl  my-auto w-[100px] ">Edit</Button>
+              <Pencil className="my-auto hover:cursor-pointer" />
+              <Button className="bg-blue-500 hover:bg-blue-500 text-white font-light rounded-xl  my-auto w-[80px] ">Save</Button>
             </div>
             <div className="mt-4 flex flex-row flex-wrap justify-between">
             <div className="grid my-3  w-full max-w-sm items-center gap-1.5">

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@radix-ui/react-separator";
-import { Send } from "lucide-react";
+import { SendHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 const ChatHistorySection = () => {
@@ -140,7 +140,7 @@ const ChatHistorySection = () => {
             placeholder="Send a message "
           />
           <Button className="bg-blue-500 hover:bg-blue-600 ml-4 rounded-full">
-            <Send className="text-white w-4 h-4" />
+            <SendHorizontal className="text-white w-4 h-4" />
           </Button>
         </div>
       </div>
