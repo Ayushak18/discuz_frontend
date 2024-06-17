@@ -134,7 +134,7 @@ const ChatHistorySection = () => {
             </p>
           </div>
         </div>
-        <div className="flex mt-8 justify-between">
+        <div className="flex mt-6 justify-between">
           <Input
             className="bg-gray-200 w-[95%] border-none rounded-full"
             placeholder="Send a message "
