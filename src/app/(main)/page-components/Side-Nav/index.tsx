@@ -52,12 +52,12 @@ const SideNav = () => {
         userData?.user?.role === "Client" ? "/requirements" : "/pitches"
       }`,
     },
-    {
-      name: "Requests",
-      icon: icons.Send,
-      isSelected: pathname.includes("requests"),
-      url: "/requests",
-    },
+    // {
+    //   name: "Requests",
+    //   icon: icons.Send,
+    //   isSelected: pathname.includes("requests"),
+    //   url: "/requests",
+    // },
     {
       name: "Log Out",
       icon: icons.LogOut,
