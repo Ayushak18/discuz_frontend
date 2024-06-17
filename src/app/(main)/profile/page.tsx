@@ -9,6 +9,7 @@ import axios from "axios";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import SideNav from "../page-components/Side-Nav";
 const Profile = () => {
   const router = useRouter();
   // if (!sessionStorage.getItem("userData")) {
@@ -30,8 +31,9 @@ const Profile = () => {
   // });
 
   return (
-    <>
-      <div className="w-[99%] h-[98%] mt-[1%] rounded-2xl bg-[white]">
+    <div className="flex justify-around">
+    <SideNav />
+      <div className="w-[78%] h-[98vh] mt-[1vh] rounded-2xl bg-[white]">
         <div
           className="flex items-center w-[100%] h-[100px] rounded-t-2xl px-8 bg-gradient-to-r from-[#8fbcec] to-[#fdf8e3]
                       justify-between mx-auto pt-2">
@@ -40,7 +42,7 @@ const Profile = () => {
           </h2>
         </div>
         <div className="">
-          <div className="w-[70%] flex flex-col border-2 border-gray-200 rounded-2xl p-4  mx-auto mt-12">
+          <div className="w-[70%] flex flex-col border-2 border-gray-200 rounded-2xl p-4  mx-auto mt-8">
             <div className="flex flex-row justify-between">
               <img src='./display-picture/display.png' className="w-20 h-20 rounded-full "></img>
               <div className="my-auto w-[75%]">
@@ -82,7 +84,7 @@ const Profile = () => {
             </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

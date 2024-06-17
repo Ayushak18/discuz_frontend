@@ -16,7 +16,7 @@ const ChatHistorySection = () => {
           </Button>
         </div>
         <Separator className="bg-[#d7d7d7]" />
-        <div className="h-[90%]  overflow-y-scroll">
+        <div className="h-[85%]  overflow-y-scroll">
           <div>
             <p className="bg-black text-white text-[14px] my-2  py-2 px-4 max-w-[50%] w-fit rounded-xl flex justify-start ">
               Hey Ayush
@@ -134,7 +134,7 @@ const ChatHistorySection = () => {
             </p>
           </div>
         </div>
-        <div className="flex justify-between">
+        <div className="flex mt-2 justify-between">
           <Input
             className="bg-gray-200 w-[95%] border-none rounded-full"
             placeholder="Send a message "
