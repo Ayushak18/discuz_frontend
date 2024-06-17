@@ -12,6 +12,7 @@
     "@dytesdk/react-ui-kit": "^1.66.0",
     "@dytesdk/react-web-core": "^1.36.3",
     "@hookform/resolvers": "^3.3.4",
+    "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-separator": "^1.0.3",
