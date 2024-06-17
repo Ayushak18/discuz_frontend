@@ -1,5 +1,7 @@
 "use client";
 
+import ContentTile from "../content-tile";
+
 export const PitchTile = (props: any) => {
   const { record } = props;
   console.log(record);
@@ -59,7 +61,7 @@ const ExpandedTile = (props: any) => {
   return (
     <>
       <div className="w-[78%] first-line: h-[98vh] my-[1vh] bg-white flex flex-col items-center  justify-center rounded-2xl overflow-y-scroll">
-        <div className="h-[600px] w-[80%] rounded-2xl shadow-2xl mt-[250px]">
+        <div className="h-[600px] w-[900px] rounded-2xl shadow-2xl mt-10">
           <div className="bg-gradient-to-r from-[#8fbcec] to-[#fdf8e3] rounded-t-2xl mx-auto h-[100px] "></div>
           <div className="h-[80%]  mx-auto bg-white p-8">
             <div className="h-[100%] flex flex-col justify-between">
@@ -106,7 +108,7 @@ const ExpandedTile = (props: any) => {
         {reqData?.pitches?.map((record: any) => {
           return (
             <>
-              <PitchTile record={record} />
+              <ContentTile content={record} />
             </>
           );
         })}
