@@ -2,9 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import ContentTile from "../content-tile";
+import { useRouter } from "next/navigation";
 
 export const PitchTile = (props: any) => {
   const { record } = props;
+
   return (
     <>
       <div className="h-[200px] w-[80%] rounded-2xl shadow-2xl my-8">
@@ -60,6 +62,8 @@ const ExpandedTile = (props: any) => {
   let userData: any = sessionStorage.getItem("userData");
   userData = JSON.parse(userData);
 
+  const router = useRouter();
+
   return (
     <>
       <div className="w-[78%] first-line: h-[98vh] my-[1vh] bg-white flex flex-col items-center  justify-center rounded-2xl overflow-y-scroll">
@@ -97,7 +101,10 @@ const ExpandedTile = (props: any) => {
               <div className="flex  flex-col items-end mt-4">
                 <div className="text-right">
                   {userData?.user?.role === "Vendor" ? (
-                    <Button className="bg-blue-500 mx-4 hover:bg-green-500 rounded-2xl text-white">
+                    <Button
+                      onClick={() => router.push("/virtual_pitch")}
+                      className="bg-blue-500 mx-4 hover:bg-green-500 rounded-2xl text-white"
+                    >
                       Pitch
                     </Button>
                   ) : (
