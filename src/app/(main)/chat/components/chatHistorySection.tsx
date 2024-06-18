@@ -1,9 +1,43 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@radix-ui/react-separator";
 import { SendHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 const ChatHistorySection = () => {
+  // Code to create a meeting
+  const { mutate, data } = useMutation({
+    mutationFn: () => {
+      return axios
+        .post(
+          `https://api.cluster.dyte.in/v2/meetings/`,
+          {
+            title: "V2.0 Test-1 Meeting Mumbai",
+            preferred_region: "ap-south-1",
+            record_on_start: false,
+            live_stream_on_start: false,
+          },
+          {
+            auth: {
+              username: "ad38f256-0ecc-46fb-9925-77c28d08b0df",
+              password: "d55e9550d2702c0e8cec",
+            },
+          }
+        )
+        .then((response) => {
+          if (response?.data?.success) {
+            console.log(response?.data?.data?.id);
+          }
+        });
+    },
+  });
+
+  console.log(data);
+  // ---------------------------------------------
+
   return (
     <>
       <div className=" h-[98vh] w-[70%] my-2 rounded-3xl ml-1 p-4 bg-white">
@@ -11,7 +45,10 @@ const ChatHistorySection = () => {
           <p className="text-[24px] text-[#676767] font-semibold leading-loose">
             Dency Pambhar
           </p>
-          <Button className="bg-[#1A88E1] text-[#fff] rounded-xl hover:bg-[#1A88E1]">
+          <Button
+            onClick={() => mutate()}
+            className="bg-[#1A88E1] text-[#fff] rounded-xl hover:bg-[#1A88E1]"
+          >
             Video Call
           </Button>
         </div>
