@@ -83,7 +83,7 @@ const Requests = () => {
                       return (
                         <CardWithForm
                           image={content.imgPath || "/images/image.png"}
-                          isRequested={false}
+                          isRequested={true}
                           title={content.product}
                           description={content.product_desc}
                           setShowTile={setShowTile}
