@@ -13,13 +13,13 @@ export function CardWithForm({
   data,
   setReqData,
 }: {
-  image: any;
-  isRequested: any;
-  title: any;
-  description: any;
-  setShowTile: any;
-  data: any;
-  setReqData: any;
+  image?: any;
+  isRequested?: any;
+  title?: any;
+  description?: any;
+  setShowTile?: any;
+  data?: any;
+  setReqData?: any;
 }) {
   return (
     <Card
