@@ -27,7 +27,7 @@ const SideNav = () => {
     LogOut,
   };
 
-  let options = [
+  let optionsClient = [
     {
       name: "Dashboard",
       icon: icons.LayoutDashboard,
@@ -65,6 +65,52 @@ const SideNav = () => {
     },
   ];
 
+  let optionsVendor = [
+    {
+      name: "Dashboard",
+      icon: icons.LayoutDashboard,
+      isSelected: pathname.includes("dashboard"),
+      url: `/${userData?.user?.role.toLowerCase()}_dashboard`,
+    },
+    {
+      name: "Chats",
+      icon: icons.MessageCircle,
+      isSelected: pathname.includes("chat"),
+      url: "/chat",
+    },
+    {
+      name: `${
+        userData?.user?.role === "Client" ? "My Requirements" : "My Pitches"
+      }`,
+      icon: icons.ListCollapseIcon,
+      isSelected: pathname.includes(
+        `${userData?.user?.role === "Client" ? "requirements" : "pitches"}`
+      ),
+      url: `${
+        userData?.user?.role === "Client" ? "/requirements" : "/pitches"
+      }`,
+    },
+    {
+      name: "Requests",
+      icon: icons.Send,
+      isSelected: pathname.includes("requests"),
+      url: "/requests",
+    },
+    {
+      name: "Log Out",
+      icon: icons.LogOut,
+      url: `/login`,
+    },
+  ];
+
+  let options;
+
+  if (
+    userData?.user?.role === "Client"
+      ? (options = optionsClient)
+      : (options = optionsVendor)
+  )
+    console.log(userData?.user);
   return (
     <>
       <div className="bg-[#21262D] h-[98vh] my-2 w-[20%] ml-2 rounded-3xl pt-4">
@@ -77,9 +123,11 @@ const SideNav = () => {
             ></img>
             <div className="flex flex-col ml-4">
               <p className="text-white text-[14px] font-semibold ">
-                Dency Pambhar
+                {userData?.user?.name}
               </p>
-              <p className="text-[#83899F] text-[12px] ">Client</p>
+              <p className="text-[#83899F] text-[12px] ">
+                {userData?.user?.role}
+              </p>
             </div>
           </div>
           <Button className="flex justify-center items-center">
