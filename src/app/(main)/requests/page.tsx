@@ -28,7 +28,7 @@ const Requests = () => {
       const response = await axios.post(
         `http://localhost:3000/requirements/sector`,
         {
-          req_sector: "Automobile",
+          req_sector: "IT",
         }
       );
       return response.data;
