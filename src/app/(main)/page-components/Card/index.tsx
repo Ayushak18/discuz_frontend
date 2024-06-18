@@ -53,10 +53,6 @@ export function CardWithForm({
           Read More
         </Button>
       </CardContent>
-      {/* <CardFooter className={` ${isRequested ? "flex" : "hidden"}  flex items-center justify-between`}>
-        <Button className="text-blue-500">Decline Request</Button>
-        <Button className="bg-gray-100 hover:bg-gray-200 rounded-full"> Accept Request</Button>
-      </CardFooter> */}
     </Card>
   );
 }
