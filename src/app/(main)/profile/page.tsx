@@ -12,80 +12,143 @@ import { Textarea } from "@/components/ui/textarea";
 import SideNav from "../page-components/Side-Nav";
 import { Pencil } from "lucide-react";
 import { Content } from "@radix-ui/react-accordion";
+import { useState } from "react";
 const Profile = () => {
   const router = useRouter();
+  const [disbaleEdit, setDisableEdit] = useState(true);
   // if (!sessionStorage.getItem("userData")) {
   //   router.push("/login");
   // }
 
   // Fetching data from session storage
-  // let userData: any = sessionStorage.getItem("userData");
-  // userData = JSON.parse(userData);
-  // const { email, role } = userData.user;
+  let userData: any = sessionStorage.getItem("userData");
+  userData = JSON.parse(userData);
+  const { email, role } = userData.user;
 
   // Get Requst to get the ORG data from the server
-  // const { isPending, error, data, isFetching } = useQuery({
-  //   queryKey: ["first-data"],
-  //   queryFn: () =>
-  //     axios
-  //       .get(`http://3.6.132.27/api/user/${email}/${role}`)
-  //       .then((res) => res.data),
-  // });
- 
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["first-data"],
+    queryFn: () =>
+      axios
+        .get(`http://localhost:3000/user/${email}/${role}`)
+        .then((res) => res.data),
+  });
+
   return (
-       
     <div className="flex justify-around">
-    <SideNav />
+      <SideNav />
       <div className="w-[78%] h-[98vh] mt-[1vh] rounded-2xl bg-[white]">
         <div
           className="flex items-center w-[100%] h-[100px] rounded-t-2xl px-8 bg-gradient-to-r from-[#8fbcec] to-[#fdf8e3]
-                      justify-between mx-auto pt-2">
+                      justify-between mx-auto pt-2"
+        >
           <h2 className="text-[#3E435D]  text-[28px] font-semibold">
-            Welcome, Dency Pambhar!
+            Welcome, {data?.user?.name}!
           </h2>
         </div>
         <div className="">
           <div className="w-[70%] flex flex-col border-2 border-gray-200 rounded-2xl p-4  mx-auto mt-8">
             <div className="flex flex-row justify-between">
-              <img src='./display-picture/display.png' className="w-20 h-20 rounded-full "></img>
+              <img
+                src="./display-picture/display.png"
+                className="w-20 h-20 rounded-full "
+              ></img>
               <div className="my-auto w-[70%]">
-                <p className="font-semibold text-[16px]">Dency Pambhar</p>
-                <p className="text-[14px] text-gray-400">dency@gmail.com</p>
+                <p className="font-semibold text-[16px]">{data?.user?.name}</p>
+                <p className="text-[14px] text-gray-400">{data?.user?.email}</p>
               </div>
-              <Pencil className="my-auto hover:cursor-pointer" />
-              <Button className="bg-blue-500 hover:bg-blue-500 text-white font-light rounded-xl  my-auto w-[80px] ">Save</Button>
+
+              {disbaleEdit ? (
+                <Pencil
+                  onClick={() => setDisableEdit(false)}
+                  className="my-auto hover:cursor-pointer mr-2 w-[80px]"
+                />
+              ) : (
+                <Button
+                  onClick={() => setDisableEdit(true)}
+                  className="bg-blue-500 hover:bg-blue-500 text-white font-light rounded-xl  my-auto w-[80px] "
+                >
+                  Save
+                </Button>
+              )}
             </div>
             <div className="mt-4 flex flex-row flex-wrap justify-between">
-            <div className="grid my-3  w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="text">First Name</Label>
-              <Input type="text" id="text" placeholder="Your First Name" className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0" />
+              <div className="grid my-3  w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="text">Name</Label>
+                <Input
+                  type="text"
+                  id="text"
+                  placeholder="Your Name"
+                  disabled={disbaleEdit}
+                  defaultValue={data?.user?.name}
+                  className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0"
+                />
+              </div>
+              {/* <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="text">Last Name</Label>
+                <Input
+                  type="text"
+                  id="text"
+                  placeholder="Your Last Name"
+                  className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0"
+                />
+              </div> */}
+              <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="text">Location</Label>
+                <Input
+                  type="text"
+                  id="text"
+                  disabled={disbaleEdit}
+                  placeholder="Your Location"
+                  defaultValue={data?.user?.location}
+                  className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0"
+                />
+              </div>
+              <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="text">Sector</Label>
+                <Input
+                  type="text"
+                  id="text"
+                  placeholder="Your Sector"
+                  defaultValue={data?.user?.sector}
+                  disabled={disbaleEdit}
+                  className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0"
+                />
+              </div>
+              <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  type="email"
+                  id="email"
+                  placeholder="Your Email"
+                  defaultValue={data?.user?.email}
+                  disabled={disbaleEdit}
+                  className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0"
+                />
+              </div>
+              <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
+                <Label htmlFor="phone">Contact Number</Label>
+                <Input
+                  type="number"
+                  id="phone"
+                  placeholder="Your Contact Number"
+                  defaultValue={data?.user?.contact}
+                  disabled={disbaleEdit}
+                  className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0"
+                />
+              </div>
+              <div className="grid my-3 w-full items-center gap-1.5">
+                <Label htmlFor="text">Company Info</Label>
+                <Textarea
+                  id="info"
+                  placeholder="Your Company Info"
+                  defaultValue={data?.user?.description}
+                  disabled={disbaleEdit}
+                  className="bg-gray-100 w-[100%] h-[150px] placeholder:text-gray-400 rounded-xl border-0"
+                />
+              </div>
             </div>
-            <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="text">Last Name</Label>
-              <Input type="text" id="text" placeholder="Your Last Name" className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0" />
-            </div>
-            <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="text">Location</Label>
-              <Input type="text" id="text" placeholder="Your Location" className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0" />
-            </div>
-            <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="text">Sector</Label>
-              <Input type="text" id="text" placeholder="Your Sector"  disabled className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0" />
-            </div>
-            <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input type="email" id="email" placeholder="Your Email" className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0" />
-            </div>
-            <div className="grid my-3 w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="phone">Contact Number</Label>
-              <Input type="number" id="phone" placeholder="Your Contact Number" className="bg-gray-100  placeholder:text-gray-400 rounded-xl border-0" />
-            </div>
-            <div className="grid my-3 w-full items-center gap-1.5">
-              <Label htmlFor="text">Company Info</Label>
-              <Textarea id="info" placeholder="Your Company Info" className="bg-gray-100 w-[100%] h-[150px] placeholder:text-gray-400 rounded-xl border-0" />
-            </div>
-            </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
