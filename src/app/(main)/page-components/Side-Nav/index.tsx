@@ -114,7 +114,10 @@ const SideNav = () => {
   return (
     <>
       <div className="bg-[#21262D] h-[98vh] my-2 w-[20%] ml-2 rounded-3xl pt-4">
-        <div className="flex items-center p-4 pr-0 mx-[20px] border-[#313843] border-2 rounded-2xl justify-between">
+        <div
+          onClick={() => router.push("/profile")}
+          className="flex cursor-pointer items-center p-4 pr-0 mx-[20px] border-[#313843] border-2 rounded-2xl justify-between"
+        >
           <div className="flex items-center">
             <img
               src={"/display-picture/display.png"}
