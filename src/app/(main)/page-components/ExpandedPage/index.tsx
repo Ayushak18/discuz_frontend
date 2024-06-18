@@ -102,7 +102,9 @@ const ExpandedTile = (props: any) => {
                 <div className="text-right">
                   {userData?.user?.role === "Vendor" ? (
                     <Button
-                      onClick={() => router.push("/virtual_pitch")}
+                      onClick={() =>
+                        router.push(`/virtual_pitch/${reqData?._id}`)
+                      }
                       className="bg-blue-500 mx-4 hover:bg-green-500 rounded-2xl text-white"
                     >
                       Pitch
