@@ -1,22 +1,23 @@
+"use client";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Logo from "@/components/logo";
 import Pitch from "@/components/pitch";
 
-const VirtualPitch = () => { 
+const VirtualPitch = () => {
   return (
     <>
       <div className="bg-[#181B1C] h-[100vh] flex">
         <div className="flex flex-col w-[60%]">
           <Logo></Logo>
-          <Pitch></Pitch>
+          <Pitch />
         </div>
         <Separator className="bg-[#505050]" orientation="vertical" />
 
         {/* Image Section */}
         <div className="py-[100px] w-[30%] m-auto">
           <Image
-            src={'/pitch.svg'}
+            src={"/pitch.svg"}
             width={300}
             height={200}
             alt="Project Logo"
