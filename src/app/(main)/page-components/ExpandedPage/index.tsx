@@ -1,10 +1,10 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import ContentTile from "../content-tile";
 
 export const PitchTile = (props: any) => {
   const { record } = props;
-  console.log(record);
   return (
     <>
       <div className="h-[200px] w-[80%] rounded-2xl shadow-2xl my-8">
@@ -57,6 +57,8 @@ export const PitchTile = (props: any) => {
 
 const ExpandedTile = (props: any) => {
   const { setShowTile, reqData } = props;
+  let userData: any = sessionStorage.getItem("userData");
+  userData = JSON.parse(userData);
 
   return (
     <>
@@ -94,12 +96,21 @@ const ExpandedTile = (props: any) => {
 
               <div className="flex  flex-col items-end mt-4">
                 <div className="text-right">
-                  <button
+                  {userData?.user?.role === "Vendor" ? (
+                    <Button className="bg-blue-500 mx-4 hover:bg-green-500 rounded-2xl text-white">
+                      Pitch
+                    </Button>
+                  ) : (
+                    <Button className="bg-blue-500 mx-4 hover:bg-green-500 rounded-2xl text-white">
+                      Edit
+                    </Button>
+                  )}
+                  <Button
                     onClick={() => setShowTile(false)}
-                    className="bg-blue-100 text-blue-500 px-4 py-2 rounded mr-2"
+                    className="bg-blue-100 hover:bg-blue-100 text-blue-500 rounded-2xl mr-2"
                   >
                     Back
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
