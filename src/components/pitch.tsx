@@ -8,6 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Pitch: React.FC = () => {
   const router = useRouter();
@@ -31,7 +33,45 @@ const Pitch: React.FC = () => {
     },
   });
 
-  // console.log(data?.data);
+  const notify = () =>
+    toast.info("Pitch Created Successfully!", {
+      toastId: "success1",
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const errorToast = () => {
+    toast.error("Something went wrong!", {
+      toastId: "error1",
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  if (isSuccess) {
+    notify();
+    setTimeout(() => {
+      router.push("/pitches");
+    }, 2000);
+  } else if (isError) {
+    errorToast();
+  }
+
+  let user: any = sessionStorage.getItem("userData");
+  user = JSON.parse(user);
+
   return (
     <>
       <div className="w-[80%] m-auto flex flex-col h-full items-center">
@@ -62,18 +102,22 @@ const Pitch: React.FC = () => {
           className="w-[100%]"
           onSubmit={(event: any) => {
             event.preventDefault();
-            alert("Form Submitted");
-            // mutate({
-            //   company_name: "ABC PVT LTD",
-            //   company_email: "b@g.com",
-            //   place: "Dehrdaun",
-            //   budget_min: 102,
-            //   budget_max: 105,
-            //   product_details:
-            //     "Enourmous win in the 20 th Century hi this one is part 2 ",
-            //   requirement_id: "6671c6c96c639f87fda89cf4",
-            //   pitch_title: "Pitch from the appication",
-            // });
+            // alert("Form Submitted");
+            // console.log(event.target.pitch_title.value);
+            // console.log(event.target.location.value);
+            // console.log(event.target.price_min.value);
+            // console.log(event.target.price_max.value);
+            // console.log(event.target.pitch_brief.value);
+            mutate({
+              company_name: user?.user?.name,
+              company_email: user?.user?.email,
+              place: event.target.location.value,
+              budget_min: event.target.price_min.value,
+              budget_max: event.target.price_max.value,
+              product_details: event.target.pitch_brief.value,
+              requirement_id: data?.data?._id,
+              pitch_title: event.target.pitch_title.value,
+            });
           }}
           action=""
         >
@@ -180,6 +224,7 @@ const Pitch: React.FC = () => {
           Back
         </Button>
       </div>
+      <ToastContainer />
     </>
   );
 };
