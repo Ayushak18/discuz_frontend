@@ -9,23 +9,32 @@ import { useQuery } from "@tanstack/react-query";
 import "../../../../public/style/scroll-bar.css";
 import "../../../../public/style/spinner.css";
 import { Separator } from "@/components/ui/separator";
+import { useState } from "react";
 
 const Pitches = () => {
   let userData: any = sessionStorage.getItem("userData");
   userData = JSON.parse(userData);
 
+  const [showTile, setShowTile] = useState(false);
+  const [reqData, setReqData] = useState(undefined);
+
+  // console.log(userData?.user?.email);
+
   const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ["requirements"],
+    queryKey: ["pitches"],
     queryFn: async () => {
       const response = await axios.post(
-        `http://localhost:3000/requirements/email`,
+        `http://localhost:3000/virtual_pitch/email`,
         {
-          email: `${userData?.user?.email}`,
+          company_email: `${userData?.user?.email}`,
         }
       );
       return response.data;
     },
   });
+
+  // console.log("Pitches");
+  // console.log(data);
 
   if (isPending) {
     return (
@@ -70,6 +79,7 @@ const Pitches = () => {
                         isRequested={false}
                         title={content.product}
                         description={content.product_desc}
+                        data={content}
                       />
                     );
                   })}

@@ -21,6 +21,7 @@ export function CardWithForm({
   data?: any;
   setReqData?: any;
 }) {
+  console.log(data);
   return (
     <Card
       className={`w-[30%] min-w-[270px] my-4 mx-4  flex flex-col justify-between rounded-2xl `}
@@ -37,10 +38,10 @@ export function CardWithForm({
       <CardContent className="mt-12">
         <div className="grid w-full items-center gap-4">
           <div className="flex flex-col text-[18px] font-semibold">
-            <p>{title}</p>
+            <p className="line-clamp-1">{data?.pitch_title}</p>
           </div>
           <div className="flex flex-col  text-justify leading-tight">
-            <p className="line-clamp-2">{description}</p>
+            <p className="line-clamp-2">{data?.product_details}</p>
           </div>
         </div>
         <Button
