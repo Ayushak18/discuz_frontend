@@ -18,7 +18,7 @@ const VirtualPitch = () => {
         <div className="py-[100px] w-[30%] m-auto">
           <Image
             src={"/pitch.svg"}
-            width={300}
+            width={400}
             height={200}
             alt="Project Logo"
             className="rounded-xl mx-auto my-auto"
