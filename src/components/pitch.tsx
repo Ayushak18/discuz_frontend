@@ -88,6 +88,7 @@ const Pitch = ({ params }: { params: any }) => {
         product_details: pitchBrief,
         requirement_id: data?.data?._id,
         pitch_title: event.target.pitch_title.value,
+        isAccepted: false,
       });
     } else {
       setValidationMessage("Input must be at least 100 words.");
