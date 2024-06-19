@@ -21,7 +21,7 @@ export function CardWithForm({
   data?: any;
   setReqData?: any;
 }) {
-  console.log(data);
+  // console.log(data);
   return (
     <Card
       className={`w-[30%] min-w-[270px] my-4 mx-4  flex flex-col justify-between rounded-2xl `}

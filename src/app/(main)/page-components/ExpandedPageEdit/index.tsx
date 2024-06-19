@@ -62,6 +62,8 @@ const ExpandedTileEdit = (props: any) => {
   let userData: any = sessionStorage.getItem("userData");
   userData = JSON.parse(userData);
 
+  // console.log(reqData);
+
   const router = useRouter();
 
   return (
@@ -73,7 +75,7 @@ const ExpandedTileEdit = (props: any) => {
             <div className="h-[100%] flex flex-col justify-between">
               <div className="flex flex-col">
                 <h1 id="title" className="text-2xl font-semibold">
-                  {reqData?.product}
+                  {reqData?.product || reqData?.pitch_title}
                 </h1>
                 <div className="header flex justify-start my-4">
                   <div className="info text-right">
@@ -95,7 +97,9 @@ const ExpandedTileEdit = (props: any) => {
                     </div>
                   </div>
                 </div>
-                <p className="mt-4">{reqData?.product_desc}</p>
+                <p className="mt-4">
+                  {reqData?.product_desc || reqData?.product_details}
+                </p>
               </div>
 
               <div className="flex  flex-col items-end mt-4">
