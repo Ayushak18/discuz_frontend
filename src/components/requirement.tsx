@@ -5,8 +5,6 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import {
   Select,
   SelectContent,
@@ -15,34 +13,12 @@ import {
   SelectValue,
   SelectGroup,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 const Requirement: React.FC = () => {
-  const notify = () =>
-    toast.info("Requirement Created Successfully!", {
-      toastId: "success1",
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
+  const [descriptionError, setDescriptionError] = useState("");
+  const [isDescriptionValid, setIsDescriptionValid] = useState(true);
 
-  const error = () => {
-    toast.error("Something went wrong!", {
-      toastId: "error1",
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  };
   let user: any = sessionStorage.getItem("userData");
   user = JSON.parse(user);
   console.log(user);
@@ -54,19 +30,22 @@ const Requirement: React.FC = () => {
     },
   });
 
-  if (isSuccess) {
-    notify();
-    setTimeout(() => {
-      router.push("/requirements");
-    }, 2000);
-  } else if (isError) {
-    error();
-  }
+  const validateDescription = (description: string) => {
+    const wordCount = description.trim().split(/\s+/).length;
+    if (wordCount < 100) {
+      setIsDescriptionValid(false);
+      setDescriptionError("Description must be at least 100 words.");
+      return false;
+    } else {
+      setIsDescriptionValid(true);
+      setDescriptionError("");
+      return true;
+    }
+  };
 
   const router = useRouter();
   return (
     <>
-      {" "}
       <div className="w-[80%] m-auto flex mb-4 flex-col h-full items-center">
         <div className="text-center flex justify-center">
           <h2 className="text-[#D9D9D9]  w-[60%]  mt-[2%] text-[20px] font-medium">
@@ -79,10 +58,16 @@ const Requirement: React.FC = () => {
           <form
             onSubmit={(event: any) => {
               event.preventDefault();
+              const description = event.target.description.value;
+
+              if (!validateDescription(description)) {
+                return;
+              }
+
               mutate({
                 email: user.user.email,
                 product: event.target.product.value,
-                product_desc: event.target.description.value,
+                product_desc: description,
                 budget_min: event.target.min_budget.value,
                 budget_max: event.target.max_budget.value,
                 isAccepted: false,
@@ -90,12 +75,6 @@ const Requirement: React.FC = () => {
                 organisation_id: user?.user?.organisation_id,
                 organisation_email: user?.user?.email,
               });
-
-              // console.log(user.user.email);
-              // console.log(event.target.sector.value);
-              // console.log(event.target.description.value);
-              // console.log(event.target.min_budget.value);
-              // console.log(event.target.max_budget.value);
             }}
           >
             <div className="flex flex-col mx-auto mt-[6%]">
@@ -103,21 +82,26 @@ const Requirement: React.FC = () => {
                 Required service/product
               </Label>
               <textarea
+                required
                 name="product"
                 id="requirement"
                 className="bg-[#D9D9D9] mt-[10px] rounded w-full h-[60px] p-2 resize-none"
               ></textarea>
-              <Label className="text-[#D9D9D9] mt-[5%]" htmlFor="text">
+              <Label className="text-[#D9D9D9] mt-[5%]" htmlFor="description">
                 Description
               </Label>
               <textarea
+                required
                 name="description"
                 id="description"
                 className="bg-[#D9D9D9] mt-[10px]  rounded w-full p-2 resize-none"
                 rows={3}
               ></textarea>
+              {!isDescriptionValid && (
+                <p className="text-red-500 mt-2">{descriptionError}</p>
+              )}
             </div>
-            <div className="mt-[1.5rem]">
+            <div className="mt-[1rem]">
               <Label className="text-[#D9D9D9] ">Sector</Label>
               <Select required name="sector">
                 <SelectTrigger className="text-black bg-[#D9D9D9] rounded mb-[6%] w-full">
@@ -141,6 +125,7 @@ const Requirement: React.FC = () => {
               <div className="flex flex-row items-center">
                 <div className="mr-auto w-[40%] mt-2 flex flex-col">
                   <Input
+                    required
                     name="min_budget"
                     placeholder=" Min."
                     id="minPrice"
@@ -150,6 +135,7 @@ const Requirement: React.FC = () => {
                 </div>
                 <div className="w-[40%] flex flex-col">
                   <Input
+                    required
                     name="max_budget"
                     placeholder=" Max."
                     id="maxPrice"
@@ -173,7 +159,6 @@ const Requirement: React.FC = () => {
           </Button>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };
