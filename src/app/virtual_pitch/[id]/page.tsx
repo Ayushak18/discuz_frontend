@@ -4,13 +4,14 @@ import { Separator } from "@/components/ui/separator";
 import Logo from "@/components/logo";
 import Pitch from "@/components/pitch";
 
-const VirtualPitch = () => {
+const VirtualPitch = ({ params }: { params: any }) => {
+  console.log(params?.id);
   return (
     <>
       <div className="bg-[#181B1C] h-[100vh] flex">
         <div className="flex flex-col w-[60%]">
           <Logo></Logo>
-          <Pitch />
+          <Pitch params={params} />
         </div>
         <Separator className="bg-[#505050]" orientation="vertical" />
 

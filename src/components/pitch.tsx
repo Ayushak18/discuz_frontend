@@ -10,23 +10,20 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Pitch: React.FC = () => {
+const Pitch = ({ params }: { params: any }) => {
+  console.log(params?.id);
   const router = useRouter();
   const [pitchBrief, setPitchBrief] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
 
-  const { data } = useQuery({
+  const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["requirements-requests"],
     queryFn: () =>
-      axios.get(`http://localhost:3000/requirements/6671e14dd6e73c6d3c43471f`),
+      axios.get(`http://localhost:3000/requirements/${params?.id}`),
   });
 
   // To Post the Pitch to a particular Requirement
-  const {
-    mutate,
-    isError,
-    isSuccess,
-  }: any = useMutation({
+  const { mutate, isError, isSuccess }: any = useMutation({
     mutationFn: (pitch) => {
       return axios
         .post("http://localhost:3000/virtual_pitch/post", pitch)
