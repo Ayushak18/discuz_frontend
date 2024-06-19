@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import ContentTile from "../content-tile";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -61,6 +61,7 @@ import axios from "axios";
 
 const ExpandedTileEdit = (props: any) => {
   const { setShowTile, reqData } = props;
+  const pathname = usePathname();
   let userData: any = sessionStorage.getItem("userData");
   userData = JSON.parse(userData);
 
@@ -123,9 +124,14 @@ const ExpandedTileEdit = (props: any) => {
 
               <div className="flex  flex-col items-end mt-4">
                 <div className="text-right">
-                  <Button className="bg-blue-500 mx-4 hover:bg-green-500 rounded-2xl text-white">
-                    Edit
-                  </Button>
+                  {pathname.includes("client_dashboard") ? (
+                    <></>
+                  ) : (
+                    <Button className="bg-blue-500 mx-4 hover:bg-green-500 rounded-2xl text-white">
+                      Edit
+                    </Button>
+                  )}
+
                   <Button
                     onClick={() => setShowTile(false)}
                     className="bg-blue-100 hover:bg-blue-100 text-blue-500 rounded-2xl mr-2"
@@ -138,12 +144,14 @@ const ExpandedTileEdit = (props: any) => {
           </div>
         </div>
 
-        {reqData?.pitches?.map((record: any) => {
-          return (
-            <>
-              <ContentTile content={record} />
-            </>
-          );
+        {reqData?.pitches?.filter((record: any) => {
+          if (record?.pitch?.isAccepted) {
+            return (
+              <>
+                <ContentTile content={record} />
+              </>
+            );
+          }
         })}
         {data ? (
           <>

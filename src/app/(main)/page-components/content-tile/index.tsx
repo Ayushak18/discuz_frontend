@@ -10,13 +10,14 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 let userData: any = sessionStorage.getItem("userData");
 userData = JSON.parse(userData);
 
 export const ContentTile = ({ content }: { content: any }) => {
   const router = useRouter();
+  const pathname = usePathname();
   // console.log(content?.pitch?._id);
   const { mutate, isError, isSuccess, data }: any = useMutation({
     mutationFn: (pitch_id) => {
@@ -110,7 +111,8 @@ export const ContentTile = ({ content }: { content: any }) => {
               {content?.pitch?.product_details || content?.product_desc}
             </p>
             <div className="flex  flex-col items-end mt-4">
-              {userData?.user?.role === "Client" ? (
+              {userData?.user?.role === "Client" &&
+              !pathname.includes("client_dashboard") ? (
                 <Button
                   onClick={() => mutate(content?.pitch?._id)}
                   className="bg-blue-500 hover:bg-green-500 rounded-2xl text-white"
