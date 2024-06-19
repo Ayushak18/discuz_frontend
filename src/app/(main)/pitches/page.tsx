@@ -77,8 +77,8 @@ const Pitches = () => {
                       <CardWithForm
                         image={content.imgPath || "/images/image.png"}
                         isRequested={false}
-                        title={content.product}
-                        description={content.product_desc}
+                        title={content.pitch_title}
+                        description={content.product_details}
                         data={content}
                       />
                     );

@@ -38,10 +38,10 @@ export function CardWithForm({
       <CardContent className="mt-12">
         <div className="grid w-full items-center gap-4">
           <div className="flex flex-col text-[18px] font-semibold">
-            <p className="line-clamp-1">{data?.pitch_title}</p>
+            <p className="line-clamp-1">{title}</p>
           </div>
           <div className="flex flex-col  text-justify leading-tight">
-            <p className="line-clamp-2">{data?.product_details}</p>
+            <p className="line-clamp-2">{description}</p>
           </div>
         </div>
         <Button

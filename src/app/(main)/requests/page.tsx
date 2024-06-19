@@ -15,9 +15,6 @@ import ExpandedvendorTile from "../page-components/ExpandedPage";
 
 const Requests = () => {
   const router = useRouter();
-  if (!sessionStorage.getItem("userData")) {
-    router.push("/login");
-  }
 
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);
