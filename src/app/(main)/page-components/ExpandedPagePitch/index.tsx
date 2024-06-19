@@ -57,7 +57,7 @@ export const PitchTile = (props: any) => {
   );
 };
 
-const ExpandedTile = (props: any) => {
+const ExpandedTilePitch = (props: any) => {
   const { setShowTile, reqData } = props;
   let userData: any = sessionStorage.getItem("userData");
   userData = JSON.parse(userData);
@@ -125,16 +125,16 @@ const ExpandedTile = (props: any) => {
             </div>
           </div>
         </div>
-        {/* {reqData?.pitches?.map((record: any) => {
+        {reqData?.pitches?.map((record: any) => {
           return (
             <>
               <ContentTile content={record} />
             </>
           );
-        })} */}
+        })}
       </div>
     </>
   );
 };
 
-export default ExpandedTile;
+export default ExpandedTilePitch;
