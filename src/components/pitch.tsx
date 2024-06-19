@@ -1,19 +1,21 @@
 "use client";
 
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Pitch: React.FC = () => {
   const router = useRouter();
-  const { isPending, error, data, isFetching } = useQuery({
+  const [pitchBrief, setPitchBrief] = useState("");
+  const [validationMessage, setValidationMessage] = useState("");
+
+  const { data } = useQuery({
     queryKey: ["requirements-requests"],
     queryFn: () =>
       axios.get(`http://localhost:3000/requirements/6671e14dd6e73c6d3c43471f`),
@@ -24,7 +26,6 @@ const Pitch: React.FC = () => {
     mutate,
     isError,
     isSuccess,
-    data: PitchData,
   }: any = useMutation({
     mutationFn: (pitch) => {
       return axios
@@ -72,6 +73,30 @@ const Pitch: React.FC = () => {
   let user: any = sessionStorage.getItem("userData");
   user = JSON.parse(user);
 
+  const validateInput = (input: string) => {
+    const wordCount = input.trim().split(/\s+/).length;
+    return wordCount >= 100;
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    if (validateInput(pitchBrief)) {
+      setValidationMessage("");
+      mutate({
+        company_name: user?.user?.name,
+        company_email: user?.user?.email,
+        place: event.target.location.value,
+        budget_min: event.target.price_min.value,
+        budget_max: event.target.price_max.value,
+        product_details: pitchBrief,
+        requirement_id: data?.data?._id,
+        pitch_title: event.target.pitch_title.value,
+      });
+    } else {
+      setValidationMessage("Input must be at least 100 words.");
+    }
+  };
+
   return (
     <>
       <div className="w-[80%] m-auto flex flex-col h-full items-center">
@@ -98,47 +123,15 @@ const Pitch: React.FC = () => {
         </div>
 
         {/* Form Section */}
-        <form
-          className="w-[100%]"
-          onSubmit={(event: any) => {
-            event.preventDefault();
-            // alert("Form Submitted");
-            // console.log(event.target.pitch_title.value);
-            // console.log(event.target.location.value);
-            // console.log(event.target.price_min.value);
-            // console.log(event.target.price_max.value);
-            // console.log(event.target.pitch_brief.value);
-            mutate({
-              company_name: user?.user?.name,
-              company_email: user?.user?.email,
-              place: event.target.location.value,
-              budget_min: event.target.price_min.value,
-              budget_max: event.target.price_max.value,
-              product_details: event.target.pitch_brief.value,
-              requirement_id: data?.data?._id,
-              pitch_title: event.target.pitch_title.value,
-            });
-          }}
-          action=""
-        >
+        <form className="w-[100%]" onSubmit={handleSubmit}>
           <div className="w-[65%] mx-auto mt-4 mb-4">
             <div className="flex flex-row mt-[4%]">
-              {/* <div className="mr-auto w-[45%]">
-                <Label className="text-[#D9D9D9] text-[12px]" htmlFor="company">
-                  Company
-                </Label>
-                <Input
-                  name="company_name"
-                  id="company"
-                  className="bg-[#D9D9D9] mt-[5px] rounded"
-                  type="text"
-                />
-              </div> */}
               <div className="w-full">
                 <Label className="text-[#D9D9D9] text-[12px]" htmlFor="title">
                   Pitch Title
                 </Label>
                 <Input
+                  required
                   name="pitch_title"
                   id="title"
                   className="bg-[#D9D9D9] mt-[5px] rounded"
@@ -151,6 +144,7 @@ const Pitch: React.FC = () => {
                 Location
               </Label>
               <Input
+                required
                 id="location"
                 className="bg-[#D9D9D9] mt-[5px] rounded"
                 type="text"
@@ -162,6 +156,7 @@ const Pitch: React.FC = () => {
                   Price Min
                 </Label>
                 <Input
+                  required
                   name="price_min"
                   id="price"
                   className="bg-[#D9D9D9] mt-[5px] rounded"
@@ -176,6 +171,7 @@ const Pitch: React.FC = () => {
                   Price Max
                 </Label>
                 <Input
+                  required
                   name="price_max"
                   className="bg-[#D9D9D9] mt-[5px] rounded"
                   type="number"
@@ -188,26 +184,19 @@ const Pitch: React.FC = () => {
                 Brief Pitch
               </Label>
               <textarea
+                required
                 id="pitch"
                 name="pitch_brief"
                 className="bg-[#D9D9D9] mt-[10px] rounded w-full h-[72px] p-2 resize-none"
                 rows={3}
+                value={pitchBrief}
+                onChange={(e) => setPitchBrief(e.target.value)}
               ></textarea>
+              {validationMessage && (
+                <p className="text-red-500 text-sm">{validationMessage}</p>
+              )}
             </div>
-            <div className="flex mt-[6%]">
-              {/* <div >
-                <Label className="text-[#D9D9D9] text-[12px]" htmlFor="files">
-                  Upload Files
-                </Label>
-                <Input
-                  id="files"
-                  className="bg-[#D9D9D9] w-[45%] mt-[10px] rounded"
-                  type="file"
-                  multiple
-                />
-              </div> */}
-            </div>
-            <div className="flex flex-col mx-auto">
+            <div className="flex flex-col mx-auto mt-[6%]">
               <Button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
