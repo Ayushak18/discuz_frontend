@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import ContentTile from "../content-tile";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 // export const PitchTile = (props: any) => {
 //   const { record } = props;
@@ -62,6 +64,23 @@ const ExpandedTileEdit = (props: any) => {
   let userData: any = sessionStorage.getItem("userData");
   userData = JSON.parse(userData);
 
+  // console.log(reqData?.requirement_id);
+
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["requirement-of-the-pitch"],
+    queryFn: async () => {
+      if (reqData?.requirement_id) {
+        const response = await axios.get(
+          `http://localhost:3000/requirements/${reqData?.requirement_id}`
+        );
+        return response.data;
+      }
+      return;
+    },
+  });
+
+  console.log(data);
+
   // console.log(reqData);
 
   const router = useRouter();
@@ -118,7 +137,7 @@ const ExpandedTileEdit = (props: any) => {
             </div>
           </div>
         </div>
-        
+
         {reqData?.pitches?.map((record: any) => {
           return (
             <>
@@ -126,7 +145,13 @@ const ExpandedTileEdit = (props: any) => {
             </>
           );
         })}
-        <ContentTile content={reqData} />
+        {data ? (
+          <>
+            <ContentTile content={data} />
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
