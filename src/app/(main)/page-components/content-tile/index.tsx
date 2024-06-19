@@ -6,11 +6,62 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 let userData: any = sessionStorage.getItem("userData");
 userData = JSON.parse(userData);
 
 export const ContentTile = ({ content }: { content: any }) => {
+  const router = useRouter();
+  // console.log(content?.pitch?._id);
+  const { mutate, isError, isSuccess, data }: any = useMutation({
+    mutationFn: (pitch_id) => {
+      return axios
+        .get(`http://localhost:3000/virtual_pitch/accept/${pitch_id}`)
+        .then((res) => res.data);
+    },
+  });
+
+  const notify = () =>
+    toast.info("Success!!!", {
+      toastId: "success1",
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const errorToast = () => {
+    toast.error("Something went wrong!", {
+      toastId: "error1",
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  if (isSuccess) {
+    notify();
+    setTimeout(() => {
+      router.push("/client_dashboard");
+    }, 2000);
+  } else if (isError) {
+    errorToast();
+  }
+
   return (
     <>
       <Accordion
@@ -55,16 +106,25 @@ export const ContentTile = ({ content }: { content: any }) => {
                 </div>
               </div>
             </div>
-            <p className="text-justify">{content?.pitch?.product_details || content?.product_desc}</p>
+            <p className="text-justify">
+              {content?.pitch?.product_details || content?.product_desc}
+            </p>
             <div className="flex  flex-col items-end mt-4">
-            { userData?.user?.role === "Client" ? (
-              <Button className="bg-blue-500 hover:bg-green-500 rounded-2xl text-white">
-                Accept
-              </Button>):<></>}
+              {userData?.user?.role === "Client" ? (
+                <Button
+                  onClick={() => mutate(content?.pitch?._id)}
+                  className="bg-blue-500 hover:bg-green-500 rounded-2xl text-white"
+                >
+                  Accept
+                </Button>
+              ) : (
+                <></>
+              )}
             </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      <ToastContainer />
     </>
   );
 };
