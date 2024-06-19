@@ -124,14 +124,7 @@ const ExpandedTilePitch = (props: any) => {
               </div>
             </div>
           </div>
-        </div>
-        {reqData?.pitches?.map((record: any) => {
-          return (
-            <>
-              <ContentTile content={record} />
-            </>
-          );
-        })}
+        </div>  
       </div>
     </>
   );
