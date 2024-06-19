@@ -24,7 +24,7 @@ export function CardWithForm({
   // console.log(data);
   return (
     <Card
-      className={`w-[30%] min-w-[270px] my-4 mx-4  flex flex-col justify-between rounded-2xl `}
+      className={`w-[30%] min-w-[270px] my-4 mx-4  h-[300px] flex flex-col justify-between rounded-2xl `}
     >
       <div className="bg-gradient-to-r from-[#8fbcec] to-[#fdf8e3] p-2  h-[60px] relative px-4 rounded-t-2xl ">
         <div className="p-2 rounded-xl border-gray-300 mt-5 bg-white border-2 w-fit">
@@ -41,7 +41,7 @@ export function CardWithForm({
             <p className="line-clamp-1">{title}</p>
           </div>
           <div className="flex flex-col  text-justify leading-tight">
-            <p className="line-clamp-2">{description}</p>
+            <p className="line-clamp-4">{description}</p>
           </div>
         </div>
         <Button
