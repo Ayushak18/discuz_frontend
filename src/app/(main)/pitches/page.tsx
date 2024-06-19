@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import "../../../../public/style/scroll-bar.css";
 import "../../../../public/style/spinner.css";
 import { Separator } from "@/components/ui/separator";
+import ExpandedTileEdit from "../page-components/ExpandedPageEdit";
 import { useState } from "react";
 
 const Pitches = () => {
@@ -50,44 +51,59 @@ const Pitches = () => {
   } else {
     return (
       <>
-        <div className="flex justify-around">
-          <SideNav />
-          <div className="w-[78%] h-[98vh] my-[1vh]">
-            <div className="rounded-3xl pb-4 bg-[#fff] ">
-              <div className="flex items-center w-[97%] justify-between mx-auto pt-4 mb-2">
-                <h2 className="text-[#3E435D]  text-[28px] font-semibold">
-                  Hello Dency!
-                </h2>
-                <div className="flex w-[25%]">
-                  <Input
-                    className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2"
-                    type="text"
-                    placeholder="Search..."
-                  />
-                </div>
+        {showTile ? (
+          <>
+            <>
+              <div className="flex justify-around">
+                <SideNav />
+                <ExpandedTileEdit reqData={reqData} setShowTile={setShowTile} />
               </div>
-              <Separator className="bg-[#d7d7d7] w-[98%] mx-auto h-[2px]" />
-              <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
-                <div className="flex flex-row  justify-between flex-wrap">
-                  {/* {data?.data?.response?.requirements.map((content:any) => {
+            </>
+          </>
+        ) : (
+          <>
+            <div className="flex justify-around">
+              <SideNav />
+              <div className="w-[78%] h-[98vh] my-[1vh]">
+                <div className="rounded-3xl pb-4 bg-[#fff] ">
+                  <div className="flex items-center w-[97%] justify-between mx-auto pt-4 mb-2">
+                    <h2 className="text-[#3E435D]  text-[28px] font-semibold">
+                      Hello Dency!
+                    </h2>
+                    <div className="flex w-[25%]">
+                      <Input
+                        className="rounded-xl border-gray-300 placeholder:text-gray-400 border-2"
+                        type="text"
+                        placeholder="Search..."
+                      />
+                    </div>
+                  </div>
+                  <Separator className="bg-[#d7d7d7] w-[98%] mx-auto h-[2px]" />
+                  <div className="flex flex-row overflow-y-scroll no-scrollbar h-[87vh] mx-auto w-[92%]">
+                    <div className="flex flex-row  justify-between flex-wrap">
+                      {/* {data?.data?.response?.requirements.map((content:any) => {
                     <CardWithForm image={content.imgPath} isRequested={!content.isAccepted} title={content.title} description={content.description} />
                   })} */}
-                  {data?.data?.map((content: any) => {
-                    return (
-                      <CardWithForm
-                        image={content.imgPath || "/images/image.png"}
-                        isRequested={false}
-                        title={content.pitch_title}
-                        description={content.product_details}
-                        data={content}
-                      />
-                    );
-                  })}
+                      {data?.data?.map((content: any) => {
+                        return (
+                          <CardWithForm
+                            image={content.imgPath || "/images/image.png"}
+                            isRequested={false}
+                            title={content.pitch_title}
+                            description={content.product_details}
+                            setShowTile={setShowTile}
+                            setReqData={setReqData}
+                            data={content}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </>
     );
   }

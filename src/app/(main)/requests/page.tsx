@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { CardWithForm } from "../page-components/Card";
 import "../../../../public/style/scroll-bar.css";
 import { useState } from "react";
-import ExpandedvendorTile from "../page-components/ExpandedPage";
+import ExpandedvendorTile from "../page-components/ExpandedPagePitch";
 
 const Requests = () => {
   const router = useRouter();

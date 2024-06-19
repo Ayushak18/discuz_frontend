@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import ExpandedVendorTile from "../ExpandedPage";
+import ExpandedVendorTile from "../ExpandedPagePitch";
 import { useEffect, useState } from "react";
 
 export function CardWithForm({

@@ -10,7 +10,7 @@ import "../../../../public/style/scroll-bar.css";
 import "../../../../public/style/spinner.css";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import ExpandedVendorTile from "../page-components/ExpandedPage";
+import ExpandedVendorTile from "../page-components/ExpandedPagePitch";
 
 const Requirements = () => {
   let userData: any = sessionStorage.getItem("userData");

@@ -1,4 +1,4 @@
-import ExpandedVendorTile from "../../page-components/ExpandedPage";
+import ExpandedVendorTile from "../../page-components/ExpandedPagePitch";
 import SideNav from "../../page-components/Side-Nav";
 
 const ExpandedPage = () => {
