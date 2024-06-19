@@ -7,6 +7,9 @@ import {
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 
+let userData: any = sessionStorage.getItem("userData");
+userData = JSON.parse(userData);
+
 export const ContentTile = ({ content }: { content: any }) => {
   return (
     <>
@@ -26,7 +29,7 @@ export const ContentTile = ({ content }: { content: any }) => {
             ></img>
             <AccordionTrigger className="w-[780px]">
               <p className=" line-clamp-1 mr-8">
-                {content?.pitch?.pitch_title}
+                {content?.pitch?.pitch_title || content?.product}
               </p>
             </AccordionTrigger>
           </div>
@@ -43,20 +46,21 @@ export const ContentTile = ({ content }: { content: any }) => {
                 <div className="inline-block ml-4">
                   <span className="text-gray-500">Budget:</span>{" "}
                   <span className="bg-blue-500 text-white px-3 py-1 text-[12px] rounded-full font-semibold">
-                    {content?.pitch?.budget_min}
+                    {content?.pitch?.budget_min || content?.budget_min}
                   </span>{" "}
                   -{" "}
                   <span className="bg-blue-500 text-white px-3 py-1 text-[12px] rounded-full font-semibold">
-                    {content?.pitch?.budget_max}
+                    {content?.pitch?.budget_max || content?.budget_max}
                   </span>
                 </div>
               </div>
             </div>
-            <p className="text-justify">{content?.pitch?.product_details}</p>
+            <p className="text-justify">{content?.pitch?.product_details || content?.product_desc}</p>
             <div className="flex  flex-col items-end mt-4">
+            { userData?.user?.role === "Client" ? (
               <Button className="bg-blue-500 hover:bg-green-500 rounded-2xl text-white">
                 Accept
-              </Button>
+              </Button>):<></>}
             </div>
           </AccordionContent>
         </AccordionItem>
