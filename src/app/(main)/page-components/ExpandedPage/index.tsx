@@ -125,13 +125,13 @@ const ExpandedTile = (props: any) => {
             </div>
           </div>
         </div>
-        {reqData?.pitches?.map((record: any) => {
+        {/* {reqData?.pitches?.map((record: any) => {
           return (
             <>
               <ContentTile content={record} />
             </>
           );
-        })}
+        })} */}
       </div>
     </>
   );
