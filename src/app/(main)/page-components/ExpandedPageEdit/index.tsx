@@ -88,7 +88,7 @@ const ExpandedTileEdit = (props: any) => {
   return (
     <>
       <div className="w-[78%] min-h-[98vh] h-fit my-[1vh] bg-white flex flex-col items-center  justify-center rounded-2xl ">
-        <div className="h-[600px] w-[900px] rounded-2xl shadow-2xl mb-4 mt-10">
+        <div className="h-fit w-[900px] rounded-2xl shadow-2xl mb-4 mt-10">
           <div className="bg-gradient-to-r from-[#8fbcec] to-[#fdf8e3] rounded-t-2xl mx-auto h-[100px] "></div>
           <div className="h-[80%]  mx-auto bg-white p-8">
             <div className="h-[100%] flex flex-col justify-between">
