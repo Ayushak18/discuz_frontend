@@ -23,7 +23,7 @@ const Requirements = () => {
     queryKey: ["requirements"],
     queryFn: async () => {
       const response = await axios.post(
-        `http://localhost:3000//email`,
+        `http://localhost:3000/requirements/email`,
         {
           email: `${userData?.user?.email}`,
         }
