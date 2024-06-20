@@ -6,37 +6,75 @@ import { SendHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ChatHistorySection = () => {
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
+
+  // console.log(userData?.user?.name);
+
   // Code to create a meeting
-  const { mutate, data } = useMutation({
-    mutationFn: () => {
-      return axios
-        .post(
-          `https://api.cluster.dyte.in/v2/meetings/`,
-          {
-            title: "V2.0 Test-1 Meeting Mumbai",
-            preferred_region: "ap-south-1",
-            record_on_start: false,
-            live_stream_on_start: false,
+  const router = useRouter();
+  const { mutate, data, isPending } = useMutation({
+    mutationFn: async () => {
+      const response = await axios.post(
+        `https://api.cluster.dyte.in/v2/meetings/`,
+        {
+          title: "V2.0 Test-1 Meeting Mumbai",
+          preferred_region: "ap-south-1",
+          record_on_start: false,
+          live_stream_on_start: false,
+        },
+        {
+          auth: {
+            username: "ad38f256-0ecc-46fb-9925-77c28d08b0df",
+            password: "d55e9550d2702c0e8cec",
           },
-          {
-            auth: {
-              username: "ad38f256-0ecc-46fb-9925-77c28d08b0df",
-              password: "d55e9550d2702c0e8cec",
-            },
-          }
-        )
-        .then((response) => {
-          if (response?.data?.success) {
-            console.log(response?.data?.data?.id);
-          }
-        });
+        }
+      );
+      return response.data;
     },
   });
 
-  console.log(data);
-  // ---------------------------------------------
+  const { mutate: participantMutate, data: participantData } = useMutation({
+    mutationFn: async (data: any) => {
+      console.log(data?.data?.data?.id);
+      const response = await axios.post(
+        `https://api.cluster.dyte.in/v2/meetings/${data?.data?.data?.id}/participants`,
+        {
+          name: userData?.user?.name,
+          picture:
+            "https://preview.redd.it/i-got-bored-so-i-decided-to-draw-a-random-image-on-the-v0-4ig97vv85vjb1.png?width=640&crop=smart&auto=webp&s=22ed6cc79cba3013b84967f32726d087e539b699",
+          custom_participant_id: "xyz",
+          preset_name: "group_call_host",
+        },
+        {
+          auth: {
+            username: "ad38f256-0ecc-46fb-9925-77c28d08b0df",
+            password: "d55e9550d2702c0e8cec",
+          },
+        }
+      );
+      return response.data;
+    },
+  });
+
+  useEffect(() => {
+    if (data?.success) {
+      participantMutate({ data });
+    }
+  }, [data?.success]);
+
+  if (participantData?.success) {
+    router.push(`/meeting_page/${participantData?.data?.token}`);
+  }
 
   return (
     <>
@@ -49,7 +87,7 @@ const ChatHistorySection = () => {
             onClick={() => mutate()}
             className="bg-[#1A88E1] text-[#fff] rounded-xl hover:bg-[#1A88E1]"
           >
-            Video Call
+            {isPending ? "Loading..." : "Video Call"}
           </Button>
         </div>
         <Separator className="bg-[#d7d7d7]" />
