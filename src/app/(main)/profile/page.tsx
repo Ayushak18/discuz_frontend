@@ -29,14 +29,17 @@ const Profile = () => {
   };
 
   let userData: any = getUserDataFromCookie();
-  const { email, role } = userData;
+  // console.log(userData?.user?.email);
+  // const { email, role } = userData?.user;
 
   // Get Requst to get the ORG data from the server
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["first-data"],
     queryFn: () =>
       axios
-        .get(`http://localhost:3000/user/${email}/${role}`)
+        .get(
+          `http://localhost:3000/user/${userData?.user?.email}/${userData?.user?.role}`
+        )
         .then((res) => res.data),
   });
 

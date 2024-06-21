@@ -20,7 +20,7 @@ const Requirements = () => {
   };
 
   let userData: any = getUserDataFromCookie();
-  const { email, role } = userData;
+  // const { email, role } = userData;
 
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);
