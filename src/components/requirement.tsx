@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Select,
   SelectContent,
@@ -29,6 +31,42 @@ const Requirement: React.FC = () => {
         .then((res) => res.data);
     },
   });
+
+  const notify = () =>
+    toast.info("Requirement Created Successfully!", {
+      toastId: "success1",
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const errorToast = () => {
+    toast.error("Something went wrong!", {
+      toastId: "error1",
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  if (isSuccess) {
+    notify();
+    setTimeout(() => {
+      router.push("/requirements");
+    }, 2000);
+  } else if (isError) {
+    errorToast();
+  }
 
   const validateDescription = (description: string) => {
     const wordCount = description.trim().split(/\s+/).length;
@@ -159,6 +197,7 @@ const Requirement: React.FC = () => {
           </Button>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
