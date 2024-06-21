@@ -61,7 +61,7 @@ export const ContentTile = ({ content }: { content: any }) => {
   if (isSuccess) {
     notify();
     setTimeout(() => {
-      // router.push("/client_dashboard");
+      router.push("/client_dashboard");
     }, 2000);
   } else if (isError) {
     errorToast();
