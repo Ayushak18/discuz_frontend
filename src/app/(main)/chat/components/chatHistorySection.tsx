@@ -26,7 +26,7 @@ const ChatHistorySection = () => {
   let userData: any = getUserDataFromCookie();
 
   useEffect(() => {
-    // fetchMessages(); // Fetch initial messages
+    fetchMessages(); // Fetch initial messages
   }, []);
 
   const fetchMessages = async () => {
