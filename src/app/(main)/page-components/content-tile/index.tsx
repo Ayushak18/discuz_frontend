@@ -18,7 +18,7 @@ userData = JSON.parse(userData);
 export const ContentTile = ({ content }: { content: any }) => {
   const router = useRouter();
   const pathname = usePathname();
-  // console.log(content?.pitch?._id);
+  // console.log(content?._id);
   const { mutate, isError, isSuccess, data }: any = useMutation({
     mutationFn: (pitch_id) => {
       return axios
@@ -26,6 +26,8 @@ export const ContentTile = ({ content }: { content: any }) => {
         .then((res) => res.data);
     },
   });
+
+  console.log(data);
 
   const notify = () =>
     toast.info("Success!!!", {
@@ -57,7 +59,7 @@ export const ContentTile = ({ content }: { content: any }) => {
   if (isSuccess) {
     notify();
     setTimeout(() => {
-      router.push("/client_dashboard");
+      // router.push("/client_dashboard");
     }, 2000);
   } else if (isError) {
     errorToast();
@@ -81,7 +83,7 @@ export const ContentTile = ({ content }: { content: any }) => {
             ></img>
             <AccordionTrigger className="w-[780px]">
               <p className=" line-clamp-1 mr-8">
-                {content?.pitch?.pitch_title || content?.product}
+                {content?.pitch_title || content?.product}
               </p>
             </AccordionTrigger>
           </div>
@@ -92,29 +94,29 @@ export const ContentTile = ({ content }: { content: any }) => {
                 <div className="inline-block">
                   <span className="text-gray-500">Location: </span>
                   <span className="text-[12px] bg-blue-500 text-white  px-3 py-1 rounded-full font-semibold">
-                    {content?.pitch?.place || "India"}
+                    {content?.place || "India"}
                   </span>
                 </div>
                 <div className="inline-block ml-4">
                   <span className="text-gray-500">Budget:</span>{" "}
                   <span className="bg-blue-500 text-white px-3 py-1 text-[12px] rounded-full font-semibold">
-                    {content?.pitch?.budget_min || content?.budget_min}
+                    {content?.budget_min || content?.budget_min}
                   </span>{" "}
                   -{" "}
                   <span className="bg-blue-500 text-white px-3 py-1 text-[12px] rounded-full font-semibold">
-                    {content?.pitch?.budget_max || content?.budget_max}
+                    {content?.budget_max || content?.budget_max}
                   </span>
                 </div>
               </div>
             </div>
             <p className="text-justify">
-              {content?.pitch?.product_details || content?.product_desc}
+              {content?.product_details || content?.product_desc}
             </p>
             <div className="flex  flex-col items-end mt-4">
               {userData?.user?.role === "Client" &&
               !pathname.includes("client_dashboard") ? (
                 <Button
-                  onClick={() => mutate(content?.pitch?._id)}
+                  onClick={() => mutate(content?._id)}
                   className="bg-blue-500 hover:bg-green-500 rounded-2xl text-white"
                 >
                   Accept

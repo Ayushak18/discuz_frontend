@@ -80,10 +80,6 @@ const ExpandedTileEdit = (props: any) => {
     },
   });
 
-  console.log(data);
-
-  // console.log(reqData);
-
   const router = useRouter();
 
   return (
@@ -144,14 +140,12 @@ const ExpandedTileEdit = (props: any) => {
           </div>
         </div>
 
-        {reqData?.pitches?.filter((record: any) => {
-          if (record?.pitch?.isAccepted) {
-            return (
-              <>
-                <ContentTile content={record} />
-              </>
-            );
-          }
+        {reqData?.pitches?.map((record: any) => {
+          return (
+            <>
+              <ContentTile content={record} />
+            </>
+          );
         })}
         {data ? (
           <>
