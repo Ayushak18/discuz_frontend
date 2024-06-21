@@ -18,11 +18,13 @@ userData = JSON.parse(userData);
 export const ContentTile = ({ content }: { content: any }) => {
   const router = useRouter();
   const pathname = usePathname();
-  // console.log(content?._id);
+  // console.log(content?.company_email);
   const { mutate, isError, isSuccess, data }: any = useMutation({
-    mutationFn: (pitch_id) => {
+    mutationFn: (params: any) => {
       return axios
-        .get(`http://localhost:3000/virtual_pitch/accept/${pitch_id}`)
+        .get(
+          `http://localhost:3000/virtual_pitch/accept/${params.id}/${params.company_email}`
+        )
         .then((res) => res.data);
     },
   });
@@ -116,7 +118,12 @@ export const ContentTile = ({ content }: { content: any }) => {
               {userData?.user?.role === "Client" &&
               !pathname.includes("client_dashboard") ? (
                 <Button
-                  onClick={() => mutate(content?._id)}
+                  onClick={() =>
+                    mutate({
+                      id: content?._id,
+                      company_email: content?.company_email,
+                    })
+                  }
                   className="bg-blue-500 hover:bg-green-500 rounded-2xl text-white"
                 >
                   Accept
