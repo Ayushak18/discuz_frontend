@@ -11,10 +11,16 @@ import "../../../../public/style/spinner.css";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import ExpandedVendorTile from "../page-components/ExpandedPageEdit";
+import Cookies from "js-cookie";
 
 const Requirements = () => {
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
+  const { email, role } = userData;
 
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);

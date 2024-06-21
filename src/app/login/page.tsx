@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
 import Logo from "@/components/logo";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const router = useRouter();
@@ -52,9 +53,10 @@ const Login = () => {
 
   if (isSuccess) {
     notify();
-    sessionStorage.setItem(
+    Cookies.set(
       "userData",
-      JSON.stringify({ token: data.token, user: data.user })
+      JSON.stringify({ token: data.token, user: data.user }),
+      { expires: 7 }
     );
     setTimeout(() => {
       router.push(`/${data?.user?.role.toLowerCase()}_dashboard`);
@@ -75,7 +77,10 @@ const Login = () => {
                 Welcome <span className="text-blue-500 font-bold">Back!</span>
               </h2>
               <p className="text-[#D9D9D9]">
-              <span className="text-blue-500 text-[16px]">Login to elevate</span> &nbsp; your B2B connections
+                <span className="text-blue-500 text-[16px]">
+                  Login to elevate
+                </span>{" "}
+                &nbsp; your B2B connections
               </p>
             </div>
 
@@ -143,7 +148,7 @@ const Login = () => {
         <div className="py-[100px] w-[30%] mx-auto">
           <img
             src={"/login.svg"}
-            style={{borderRadius:'50%', width:'400px', height:'400px'}}
+            style={{ borderRadius: "50%", width: "400px", height: "400px" }}
             className="rounded-full object-contain mx-auto"
             // width={400}
             // height={400}

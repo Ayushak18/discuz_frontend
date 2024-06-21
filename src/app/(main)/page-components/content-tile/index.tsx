@@ -11,9 +11,14 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter, usePathname } from "next/navigation";
+import Cookies from "js-cookie";
 
-let userData: any = sessionStorage.getItem("userData");
-userData = JSON.parse(userData);
+const getUserDataFromCookie = () => {
+  const userData = Cookies.get("userData");
+  return userData ? JSON.parse(userData) : null;
+};
+
+let userData: any = getUserDataFromCookie();
 
 export const ContentTile = ({ content }: { content: any }) => {
   const router = useRouter();

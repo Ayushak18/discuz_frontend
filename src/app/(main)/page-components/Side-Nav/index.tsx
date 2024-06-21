@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 import {
   ChevronDown,
   LayoutDashboard,
@@ -16,8 +17,11 @@ import {
 const SideNav = () => {
   const pathname = usePathname();
   const router = useRouter();
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+  let userData: any = getUserDataFromCookie();
 
   const icons = {
     LayoutDashboard,

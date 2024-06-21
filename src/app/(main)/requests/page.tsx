@@ -12,6 +12,7 @@ import { CardWithForm } from "../page-components/Card";
 import "../../../../public/style/scroll-bar.css";
 import { useState } from "react";
 import ExpandedvendorTile from "../page-components/ExpandedPagePitch";
+import Cookies from "js-cookie";
 
 const Requests = () => {
   const router = useRouter();
@@ -19,8 +20,12 @@ const Requests = () => {
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);
 
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["requirements_for_vendor"],

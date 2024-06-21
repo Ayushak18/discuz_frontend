@@ -11,10 +11,15 @@ import "../../../../public/style/spinner.css";
 import { Separator } from "@/components/ui/separator";
 import ExpandedTileEdit from "../page-components/ExpandedPageEdit";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 const Pitches = () => {
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);

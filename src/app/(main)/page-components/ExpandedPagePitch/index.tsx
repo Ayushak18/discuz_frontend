@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import ContentTile from "../content-tile";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 // export const PitchTile = (props: any) => {
 //   const { record } = props;
@@ -59,8 +60,12 @@ import { useRouter } from "next/navigation";
 
 const ExpandedTilePitch = (props: any) => {
   const { setShowTile, reqData } = props;
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   const router = useRouter();
 
@@ -124,7 +129,7 @@ const ExpandedTilePitch = (props: any) => {
               </div>
             </div>
           </div>
-        </div>  
+        </div>
       </div>
     </>
   );

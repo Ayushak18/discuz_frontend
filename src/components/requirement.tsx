@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 import {
   Select,
   SelectContent,
@@ -21,9 +22,12 @@ const Requirement: React.FC = () => {
   const [descriptionError, setDescriptionError] = useState("");
   const [isDescriptionValid, setIsDescriptionValid] = useState(true);
 
-  let user: any = sessionStorage.getItem("userData");
-  user = JSON.parse(user);
-  console.log(user);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (requirement) => {
       return axios
@@ -103,15 +107,15 @@ const Requirement: React.FC = () => {
               }
 
               mutate({
-                email: user.user.email,
+                email: userData.user.email,
                 product: event.target.product.value,
                 product_desc: description,
                 budget_min: event.target.min_budget.value,
                 budget_max: event.target.max_budget.value,
                 isAccepted: false,
                 req_sector: event.target.sector.value,
-                organisation_id: user?.user?.organisation_id,
-                organisation_email: user?.user?.email,
+                organisation_id: userData?.user?.organisation_id,
+                organisation_email: userData?.user?.email,
               });
             }}
           >

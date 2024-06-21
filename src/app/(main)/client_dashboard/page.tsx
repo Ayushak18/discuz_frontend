@@ -14,6 +14,7 @@ import SideNav from "../page-components/Side-Nav";
 import "../../../../public/style/scroll-bar.css";
 import { useEffect, useState } from "react";
 import ExpandedVendorTile from "../page-components/ExpandedPageEdit";
+import Cookies from "js-cookie";
 
 const Dashboard = () => {
   // const router = useRouter();
@@ -21,8 +22,12 @@ const Dashboard = () => {
   //   router.push("/login");
   // }
 
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (email) => {

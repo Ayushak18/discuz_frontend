@@ -9,6 +9,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 const Pitch = ({ params }: { params: any }) => {
   console.log(params?.id);
@@ -67,8 +68,12 @@ const Pitch = ({ params }: { params: any }) => {
     errorToast();
   }
 
-  let user: any = sessionStorage.getItem("userData");
-  user = JSON.parse(user);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   const validateInput = (input: string) => {
     const wordCount = input.trim().split(/\s+/).length;
@@ -80,8 +85,8 @@ const Pitch = ({ params }: { params: any }) => {
     if (validateInput(pitchBrief)) {
       setValidationMessage("");
       mutate({
-        company_name: user?.user?.name,
-        company_email: user?.user?.email,
+        company_name: userData?.user?.name,
+        company_email: userData?.user?.email,
         place: event.target.location.value,
         budget_min: event.target.price_min.value,
         budget_max: event.target.price_max.value,

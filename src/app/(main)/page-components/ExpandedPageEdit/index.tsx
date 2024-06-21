@@ -5,6 +5,7 @@ import ContentTile from "../content-tile";
 import { useRouter, usePathname } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 // export const PitchTile = (props: any) => {
 //   const { record } = props;
@@ -62,8 +63,12 @@ import axios from "axios";
 const ExpandedTileEdit = (props: any) => {
   const { setShowTile, reqData } = props;
   const pathname = usePathname();
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   // console.log(reqData?.requirement_id);
 

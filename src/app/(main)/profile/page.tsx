@@ -13,6 +13,8 @@ import SideNav from "../page-components/Side-Nav";
 import { Pencil } from "lucide-react";
 import { Content } from "@radix-ui/react-accordion";
 import { useState } from "react";
+import Cookies from "js-cookie";
+
 const Profile = () => {
   const router = useRouter();
   const [disbaleEdit, setDisableEdit] = useState(true);
@@ -21,9 +23,13 @@ const Profile = () => {
   // }
 
   // Fetching data from session storage
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
-  const { email, role } = userData.user;
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
+  const { email, role } = userData;
 
   // Get Requst to get the ORG data from the server
   const { isPending, error, data, isFetching } = useQuery({

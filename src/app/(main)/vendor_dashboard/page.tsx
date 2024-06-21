@@ -12,10 +12,15 @@ import { Input } from "@/components/ui/input";
 import { CardWithForm } from "../page-components/Card";
 import SideNav from "../page-components/Side-Nav";
 import "../../../../public/style/scroll-bar.css";
+import Cookies from "js-cookie";
 
 const Dashboard = () => {
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   console.log(userData?.user?.sector);
 
