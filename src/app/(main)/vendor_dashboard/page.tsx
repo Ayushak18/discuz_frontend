@@ -12,10 +12,16 @@ import { Input } from "@/components/ui/input";
 import { CardWithForm } from "../page-components/Card";
 import SideNav from "../page-components/Side-Nav";
 import "../../../../public/style/scroll-bar.css";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
 
   console.log(userData?.user?.sector);
 

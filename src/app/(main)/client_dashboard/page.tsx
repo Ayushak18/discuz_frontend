@@ -21,18 +21,23 @@ const Dashboard = () => {
   //   router.push("/login");
   // }
 
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
 
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (email) => {
       return axios.post(`http://localhost:3000/requirements/email`, email);
     },
   });
-
+  console.log(userData);
   useEffect(() => {
     mutate({
-      email: userData.user.email,
+      email: userData?.user?.email,
     });
   }, []);
 

@@ -15,15 +15,20 @@ import {
   SelectValue,
   SelectGroup,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Requirement: React.FC = () => {
   const [descriptionError, setDescriptionError] = useState("");
   const [isDescriptionValid, setIsDescriptionValid] = useState(true);
 
-  let user: any = sessionStorage.getItem("userData");
-  user = JSON.parse(user);
-  console.log(user);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
+  console.log(userData);
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (requirement) => {
       return axios
@@ -103,15 +108,15 @@ const Requirement: React.FC = () => {
               }
 
               mutate({
-                email: user.user.email,
+                email: userData.user.email,
                 product: event.target.product.value,
                 product_desc: description,
                 budget_min: event.target.min_budget.value,
                 budget_max: event.target.max_budget.value,
                 isAccepted: false,
                 req_sector: event.target.sector.value,
-                organisation_id: user?.user?.organisation_id,
-                organisation_email: user?.user?.email,
+                organisation_id: userData?.user?.organisation_id,
+                organisation_email: userData?.user?.email,
               });
             }}
           >

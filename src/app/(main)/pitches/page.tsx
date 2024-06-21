@@ -10,11 +10,16 @@ import "../../../../public/style/scroll-bar.css";
 import "../../../../public/style/spinner.css";
 import { Separator } from "@/components/ui/separator";
 import ExpandedTileEdit from "../page-components/ExpandedPageEdit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Pitches = () => {
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
 
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);

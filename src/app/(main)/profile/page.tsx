@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import SideNav from "../page-components/Side-Nav";
 import { Pencil } from "lucide-react";
 import { Content } from "@radix-ui/react-accordion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Profile = () => {
   const router = useRouter();
   const [disbaleEdit, setDisableEdit] = useState(true);
@@ -21,8 +21,13 @@ const Profile = () => {
   // }
 
   // Fetching data from session storage
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
   const { email, role } = userData.user;
 
   // Get Requst to get the ORG data from the server

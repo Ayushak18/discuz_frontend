@@ -10,7 +10,7 @@ import SideNav from "../page-components/Side-Nav";
 import { Input } from "@/components/ui/input";
 import { CardWithForm } from "../page-components/Card";
 import "../../../../public/style/scroll-bar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExpandedvendorTile from "../page-components/ExpandedPagePitch";
 
 const Requests = () => {
@@ -19,8 +19,13 @@ const Requests = () => {
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);
 
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
 
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["requirements_for_vendor"],

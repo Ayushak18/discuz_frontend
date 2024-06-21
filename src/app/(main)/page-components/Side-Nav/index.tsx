@@ -12,12 +12,18 @@ import {
   MessageCircle,
   Send,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const SideNav = () => {
   const pathname = usePathname();
   const router = useRouter();
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
 
   const icons = {
     LayoutDashboard,

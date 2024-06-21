@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -67,8 +67,13 @@ const Pitch = ({ params }: { params: any }) => {
     errorToast();
   }
 
-  let user: any = sessionStorage.getItem("userData");
-  user = JSON.parse(user);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
 
   const validateInput = (input: string) => {
     const wordCount = input.trim().split(/\s+/).length;
@@ -80,8 +85,8 @@ const Pitch = ({ params }: { params: any }) => {
     if (validateInput(pitchBrief)) {
       setValidationMessage("");
       mutate({
-        company_name: user?.user?.name,
-        company_email: user?.user?.email,
+        company_name: userData?.user?.name,
+        company_email: userData?.user?.email,
         place: event.target.location.value,
         budget_min: event.target.price_min.value,
         budget_max: event.target.price_max.value,

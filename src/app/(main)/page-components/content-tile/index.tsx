@@ -5,17 +5,21 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter, usePathname } from "next/navigation";
 
-let userData: any = sessionStorage.getItem("userData");
-userData = JSON.parse(userData);
-
 export const ContentTile = ({ content }: { content: any }) => {
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
   const router = useRouter();
   const pathname = usePathname();
   // console.log(content?.company_email);

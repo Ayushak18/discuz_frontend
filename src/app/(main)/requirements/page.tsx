@@ -13,8 +13,13 @@ import { useEffect, useState } from "react";
 import ExpandedVendorTile from "../page-components/ExpandedPageEdit";
 
 const Requirements = () => {
-  let userData: any = sessionStorage.getItem("userData");
-  userData = JSON.parse(userData);
+  const [userData, setUserData] = useState<any>(undefined);
+
+  useEffect(() => {
+    let user: any = sessionStorage.getItem("userData");
+    user = JSON.parse(user);
+    setUserData(user);
+  }, []);
 
   const [showTile, setShowTile] = useState(false);
   const [reqData, setReqData] = useState(undefined);
