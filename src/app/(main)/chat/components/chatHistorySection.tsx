@@ -4,6 +4,7 @@ import { Separator } from "@radix-ui/react-separator";
 import { SendHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 interface Message {
   sender: string;
@@ -13,6 +14,13 @@ interface Message {
 const ChatHistorySection = () => {
   const [messages, setMessages] = useState<Message[]>([]); // Assuming Message type is defined
   const [inputMessage, setInputMessage] = useState("");
+
+  const getUserDataFromCookie = () => {
+    const userData = Cookies.get("userData");
+    return userData ? JSON.parse(userData) : null;
+  };
+
+  let userData: any = getUserDataFromCookie();
 
   useEffect(() => {
     fetchMessages(); // Fetch initial messages
@@ -24,7 +32,7 @@ const ChatHistorySection = () => {
       setMessages(response.data);
 
       // Wait for some time and fetch again (simulate long-polling)
-      setTimeout(fetchMessages, 5000); // Fetch messages every 5 seconds
+      setTimeout(fetchMessages, 2000); // Fetch messages every 5 seconds
     } catch (error) {
       console.error("Error fetching messages:", error);
     }
@@ -32,8 +40,9 @@ const ChatHistorySection = () => {
 
   const sendMessage = async () => {
     try {
-      const senderEmail = "ayush@gmail.com";
-      const receiverEmail = "dency@gmail.com";
+      const senderEmail = userData.user.email;
+      const receiverEmail =
+        userData.user.email === "a@g.com" ? "b@g.com" : "a@g.com";
       await axios.post("http://localhost:3000/chat/send_message", {
         sender_email: senderEmail,
         receiver_email: receiverEmail,
@@ -67,14 +76,14 @@ const ChatHistorySection = () => {
               <div
                 key={index}
                 className={`flex ${
-                  msg.sender === "ayush@gmail.com"
+                  msg.sender === userData.user.email
                     ? "justify-end"
                     : "justify-start"
                 }`}
               >
                 <p
                   className={`text-white text-[14px] my-2 py-2 px-4 max-w-[50%] w-fit rounded-xl ${
-                    msg.sender === "ayush@gmail.com"
+                    msg.sender === userData.user.email
                       ? "bg-blue-500"
                       : "bg-black"
                   }`}
