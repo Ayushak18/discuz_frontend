@@ -28,7 +28,7 @@ const Dashboard = () => {
     queryKey: ["requirements_for_vendor"],
     queryFn: async () => {
       const response = await axios.post(
-        `http://localhost:3000/requirements/sector`,
+        `https://discuz-backend.onrender.com/requirements/sector`,
         {
           req_sector: "Automobile",
         }

@@ -31,7 +31,7 @@ const ChatHistorySection = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get<Message[]>("http://localhost:3000/chat");
+      const response = await axios.get<Message[]>("https://discuz-backend.onrender.com/chat");
       setMessages(response.data);
 
       // Wait for some time and fetch again (simulate long-polling)
@@ -46,7 +46,7 @@ const ChatHistorySection = () => {
       const senderEmail = userData.user.email;
       const receiverEmail =
         userData.user.email === "a@g.com" ? "b@g.com" : "a@g.com";
-      await axios.post("http://localhost:3000/chat/send_message", {
+      await axios.post("https://discuz-backend.onrender.com/chat/send_message", {
         sender_email: senderEmail,
         receiver_email: receiverEmail,
         message: inputMessage,

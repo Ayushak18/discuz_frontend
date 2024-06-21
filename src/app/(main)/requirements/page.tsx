@@ -29,7 +29,7 @@ const Requirements = () => {
     queryKey: ["requirements"],
     queryFn: async () => {
       const response = await axios.post(
-        `http://localhost:3000/requirements/email`,
+        `https://discuz-backend.onrender.com/requirements/email`,
         {
           email: `${userData?.user?.email}`,
         }

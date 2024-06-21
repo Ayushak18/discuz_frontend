@@ -30,7 +30,7 @@ const Pitches = () => {
     queryKey: ["pitches"],
     queryFn: async () => {
       const response = await axios.post(
-        `http://localhost:3000/virtual_pitch/email`,
+        `https://discuz-backend.onrender.com/virtual_pitch/email`,
         {
           company_email: `${userData?.user?.email}`,
         }

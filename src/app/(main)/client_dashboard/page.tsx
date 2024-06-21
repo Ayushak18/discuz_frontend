@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (email) => {
-      return axios.post(`http://localhost:3000/requirements/email`, email);
+      return axios.post(`https://discuz-backend.onrender.com/requirements/email`, email);
     },
   });
 
@@ -50,7 +50,7 @@ const Dashboard = () => {
 
   // const { isPending, error, data:, isFetching } = useQuery({
   //   queryKey: ["requirements-pitches-dashboard"],
-  //   queryFn: () => axios.get(`http://localhost:3000/requirements/a@g.com`),
+  //   queryFn: () => axios.get(`https://discuz-backend.onrender.com/requirements/a@g.com`),
   // });
 
   // console.log(data);

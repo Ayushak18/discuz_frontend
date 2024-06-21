@@ -51,7 +51,7 @@ const SignUp = () => {
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (newUser) => {
       return axios
-        .post("http://localhost:3000/user/signup", newUser)
+        .post("https://discuz-backend.onrender.com/user/signup", newUser)
         .then((res) => res.data);
     },
   });

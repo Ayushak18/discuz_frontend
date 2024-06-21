@@ -46,7 +46,7 @@ const Login = () => {
     useMutation({
       mutationFn: (user) => {
         return axios
-          .post("http://localhost:3000/user/login", user)
+          .post("https://discuz-backend.onrender.com/user/login", user)
           .then((res) => res.data);
       },
     });

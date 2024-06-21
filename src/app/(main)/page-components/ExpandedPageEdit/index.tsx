@@ -77,7 +77,7 @@ const ExpandedTileEdit = (props: any) => {
     queryFn: async () => {
       if (reqData?.requirement_id) {
         const response = await axios.get(
-          `http://localhost:3000/requirements/${reqData?.requirement_id}`
+          `https://discuz-backend.onrender.com/requirements/${reqData?.requirement_id}`
         );
         return response.data;
       }

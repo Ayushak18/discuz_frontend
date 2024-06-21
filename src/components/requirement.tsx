@@ -31,7 +31,7 @@ const Requirement: React.FC = () => {
   const { mutate, isError, isSuccess, isPending, data }: any = useMutation({
     mutationFn: (requirement) => {
       return axios
-        .post("http://localhost:3000/requirements/post", requirement)
+        .post("https://discuz-backend.onrender.com/requirements/post", requirement)
         .then((res) => res.data);
     },
   });

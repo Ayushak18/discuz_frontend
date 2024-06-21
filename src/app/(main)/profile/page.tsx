@@ -38,7 +38,7 @@ const Profile = () => {
     queryFn: () =>
       axios
         .get(
-          `http://localhost:3000/user/${userData?.user?.email}/${userData?.user?.role}`
+          `https://discuz-backend.onrender.com/user/${userData?.user?.email}/${userData?.user?.role}`
         )
         .then((res) => res.data),
   });

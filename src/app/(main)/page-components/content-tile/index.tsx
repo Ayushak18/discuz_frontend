@@ -28,7 +28,7 @@ export const ContentTile = ({ content }: { content: any }) => {
     mutationFn: (params: any) => {
       return axios
         .get(
-          `http://localhost:3000/virtual_pitch/accept/${params.id}/${params.company_email}`
+          `https://discuz-backend.onrender.com/virtual_pitch/accept/${params.id}/${params.company_email}`
         )
         .then((res) => res.data);
     },

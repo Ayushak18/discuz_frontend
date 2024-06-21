@@ -20,14 +20,14 @@ const Pitch = ({ params }: { params: any }) => {
   const { isPending, error, data, isFetching } = useQuery({
     queryKey: ["requirements-requests"],
     queryFn: () =>
-      axios.get(`http://localhost:3000/requirements/${params?.id}`),
+      axios.get(`https://discuz-backend.onrender.com/requirements/${params?.id}`),
   });
 
   // To Post the Pitch to a particular Requirement
   const { mutate, isError, isSuccess }: any = useMutation({
     mutationFn: (pitch) => {
       return axios
-        .post("http://localhost:3000/virtual_pitch/post", pitch)
+        .post("https://discuz-backend.onrender.com/virtual_pitch/post", pitch)
         .then((res) => res.data);
     },
   });
