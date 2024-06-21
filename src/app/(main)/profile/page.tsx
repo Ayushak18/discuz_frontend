@@ -28,7 +28,7 @@ const Profile = () => {
     user = JSON.parse(user);
     setUserData(user);
   }, []);
-  const { email, role } = userData.user;
+  const { email, role } = userData?.user;
 
   // Get Requst to get the ORG data from the server
   const { isPending, error, data, isFetching } = useQuery({
