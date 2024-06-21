@@ -141,11 +141,25 @@ const ExpandedTileEdit = (props: any) => {
         </div>
 
         {reqData?.pitches?.map((record: any) => {
-          return (
-            <>
-              <ContentTile content={record} />
-            </>
-          );
+          if (
+            record.isAccepted === false &&
+            pathname.includes("/requirements")
+          ) {
+            return (
+              <>
+                <ContentTile content={record} />
+              </>
+            );
+          } else if (
+            record.isAccepted === true &&
+            pathname.includes("/client_dashboard")
+          ) {
+            return (
+              <>
+                <ContentTile content={record} />
+              </>
+            );
+          }
         })}
         {data ? (
           <>
