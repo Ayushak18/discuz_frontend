@@ -67,7 +67,7 @@ const Requirements = () => {
                 <div className="rounded-3xl pb-4 bg-[#fff] ">
                   <div className="flex items-center w-[97%] justify-between mx-auto pt-4 mb-2">
                     <h2 className="text-[#3E435D]  text-[28px] font-semibold">
-                      Hello Dency!
+                      Hello {userData?.user?.name}!
                     </h2>
                     <div className="flex w-[35%]">
                       <Input
