@@ -31,7 +31,9 @@ const ChatHistorySection = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get<Message[]>("https://discuz-backend.onrender.com/chat");
+      const response = await axios.get<Message[]>(
+        "https://discuz-backend.onrender.com/chat"
+      );
       setMessages(response.data);
 
       // Wait for some time and fetch again (simulate long-polling)
@@ -46,11 +48,14 @@ const ChatHistorySection = () => {
       const senderEmail = userData.user.email;
       const receiverEmail =
         userData.user.email === "a@g.com" ? "b@g.com" : "a@g.com";
-      await axios.post("https://discuz-backend.onrender.com/chat/send_message", {
-        sender_email: senderEmail,
-        receiver_email: receiverEmail,
-        message: inputMessage,
-      });
+      await axios.post(
+        "https://discuz-backend.onrender.com/chat/send_message",
+        {
+          sender_email: senderEmail,
+          receiver_email: receiverEmail,
+          message: inputMessage,
+        }
+      );
       setInputMessage(""); // Clear input field after sending message
       // No need to fetch messages here because long-polling will update them
     } catch (error) {
@@ -58,38 +63,45 @@ const ChatHistorySection = () => {
     }
   };
 
-  const { mutate, data, isPending } = useMutation({
-    mutationFn: async () => {
-      const response = await axios.post(
-        `https://api.cluster.dyte.in/v2/meetings/`,
-        {
-          title: "V2.0 Test-1 Meeting Mumbai",
-          preferred_region: "ap-south-1",
-          record_on_start: false,
-          live_stream_on_start: false,
-        },
-        {
-          auth: {
-            username: "ad38f256-0ecc-46fb-9925-77c28d08b0df",
-            password: "d55e9550d2702c0e8cec",
-          },
-        }
-      );
-      return response.data;
-    },
-  });
+  // const { mutate, data, isPending } = useMutation({
+  //   mutationFn: async () => {
+  //     const response = await axios.post(
+  //       `https://api.cluster.dyte.in/v2/meetings/`,
+  //       {
+  //         title: "V2.0 Test-1 Meeting Mumbai",
+  //         preferred_region: "ap-south-1",
+  //         record_on_start: false,
+  //         live_stream_on_start: false,
+  //       },
+  //       {
+  //         auth: {
+  //           username: "ad38f256-0ecc-46fb-9925-77c28d08b0df",
+  //           password: "d55e9550d2702c0e8cec",
+  //         },
+  //       }
+  //     );
+  //     return response.data;
+  //   },
+  // });
 
-  const { mutate: participantMutate, data: participantData } = useMutation({
+  const {
+    mutate: participantMutate,
+    data: participantData,
+    isPending,
+  } = useMutation({
     mutationFn: async (data: any) => {
-      console.log(data?.data?.data?.id);
+      // console.log(data?.data?.data?.id);
       const response = await axios.post(
-        `https://api.cluster.dyte.in/v2/meetings/${data?.data?.data?.id}/participants`,
+        `https://api.cluster.dyte.in/v2/meetings/bbb9feae-4b81-4dad-ad89-49bc3c66d992/participants`,
         {
           name: userData?.user?.name,
           picture:
             "https://preview.redd.it/i-got-bored-so-i-decided-to-draw-a-random-image-on-the-v0-4ig97vv85vjb1.png?width=640&crop=smart&auto=webp&s=22ed6cc79cba3013b84967f32726d087e539b699",
           custom_participant_id: "xyz",
-          preset_name: "group_call_host",
+          preset_name:
+            userData?.user?.role === "Client"
+              ? "group_call_host"
+              : "group_call_participant",
         },
         {
           auth: {
@@ -102,11 +114,11 @@ const ChatHistorySection = () => {
     },
   });
 
-  useEffect(() => {
-    if (data?.success) {
-      participantMutate({ data });
-    }
-  }, [data?.success]);
+  // useEffect(() => {
+  //   if (data?.success) {
+  //     // participantMutate({});
+  //   }
+  // }, [data?.success]);
 
   if (participantData?.success) {
     router.push(`/meeting_page/${participantData?.data?.token}`);
@@ -120,7 +132,7 @@ const ChatHistorySection = () => {
             Dency Pambhar
           </p>
           <Button
-            onClick={() => mutate()}
+            onClick={() => participantMutate({})}
             className="bg-[#1A88E1] text-[#fff] rounded-xl hover:bg-[#1A88E1]"
           >
             {isPending ? "Loading..." : "Video Call"}
