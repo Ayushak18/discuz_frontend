@@ -10,12 +10,6 @@ const ChatList = () => {
         </h2>
         <Separator className="bg-[#d7d7d7]" />
         <ChatPersonTile />
-        <ChatPersonTile />
-        <ChatPersonTile />
-        <ChatPersonTile />
-        <ChatPersonTile />
-        <ChatPersonTile />
-        <ChatPersonTile />
       </div>
     </>
   );
